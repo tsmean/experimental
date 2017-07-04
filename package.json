@@ -10,7 +10,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "update-submodule": "git submodule foreach git pull origin master",
-    "install": "./install.sh"
+    "install": "npm run gitinit && cd backend && npm run install && cd ../frontend && npm run install",
+    "gitinit": "git submodule init && git submodule update"
   },
   "repository": {
     "type": "git",
