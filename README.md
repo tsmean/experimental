@@ -1,4 +1,4 @@
-![tsmean logo](./tsmean-logo.png)
+![tsmean logo](./img/tsmean-logo.png)
 
 This is a **starter kit** for webapps **completely written in typescript**.
 
@@ -62,7 +62,7 @@ just takes a fraction of the time.
 # Live Demo
 http://demo.tsmean.com
 
-[![screenshot](./screengif.gif)](http://demo.tsmean.com)
+[![screenshot](./img/screengif.gif)](http://demo.tsmean.com)
 
 
 
