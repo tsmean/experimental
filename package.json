@@ -1,6 +1,6 @@
 {
   "name": "ts-mean",
-  "version": "2.0.4",
+  "version": "3.0.0",
   "description": "Boilerplate for a TS-MEAN App",
   "main": "index.js",
   "dependencies": {
