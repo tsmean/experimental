@@ -52,12 +52,16 @@ and its own npm package. You can develop all modules independently,
 for example you could just download the router repository and work on the that one.
 
 This repository here combines all repositories through git submodules.
-This has the benefit of an 'all in one place experience' and you get a
+This has the benefit of an "all in one place experience" and you get a
 good overview over the code involved in this project.
-However, for actual development I recommend working on individual features
-by downloading just the necessary repo. IDEs such as IntelliJ can handle
-this much better. For example auto-importing typescript dependencies
-just takes a fraction of the time.
+In case you use an IDE, I recommend opening just one feature module per editor-window
+(as opposed to just opening the entire tsmean project).
+IDEs typically can handle this much better,
+for example IntelliJ can resolve Typescript imports much faster and is less laggy
+in general when only part of the project is opened.
+
+I actually like this workflow a lot. Open a feature module, implement changes on feature
+and tests, publish to npm, pull in other parts of the projects.
 
 # Live Demo
 http://demo.tsmean.com
