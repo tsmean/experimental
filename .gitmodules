@@ -1,0 +1,6 @@
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/bersling/typescript-angular-seed
+[submodule "backend"]
+	path = backend
+	url = https://github.com/bersling/typescript-mongo-express-node-seed

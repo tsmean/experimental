@@ -1,0 +1,33 @@
+{
+  "name": "ts-mean",
+  "version": "2.0.4",
+  "description": "Boilerplate for a TS-MEAN App",
+  "main": "index.js",
+  "dependencies": {
+    "ts-node": "^1.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update-submodule": "git submodule foreach git pull origin master",
+    "install": "./install.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bersling/typescript-mongo-express-angular-node-seed"
+  },
+  "keywords": [
+    "Boilerplate",
+    "MEAN",
+    "NodeJs",
+    "ExpressJs",
+    "Angular",
+    "MongoDB"
+  ],
+  "author": "Daniel Niederberger <bersling@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bersling/typescript-mongo-express-angular-node-seed/issues"
+  },
+  "homepage": "https://github.com/bersling/typescript-mongo-express-angular-node-seed#readme"
+}
