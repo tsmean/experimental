@@ -66,7 +66,7 @@ and tests, publish to npm, pull in other parts of the projects.
 # Live Demo
 http://demo.tsmean.com
 
-[![screenshot](https://s3.eu-central-1.amazonaws.com/bersling/images/tsmean-logo.png)](http://demo.tsmean.com)
+[![screenshot](https://s3.eu-central-1.amazonaws.com/bersling/images/animals3.gif)](http://demo.tsmean.com)
 
 
 
