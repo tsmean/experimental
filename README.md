@@ -41,8 +41,8 @@ First `cd backend`, then:
 First `cd frontend`, then:
 
 - to start the app `cd main` and run `ng serve`. Check it out on http://localhost:4200
-- you can develop all modules independently. For example, `cd hero` and run `ng serve`.
-This launches a minimal app only displaying the hero module (i.e. without login etc).
+- you can develop all modules independently. For example, `cd user` and run `ng serve`.
+This launches a minimal app only displaying the user module (i.e. without login etc).
 You can test all modules using `ng test`.
 
 # Development
