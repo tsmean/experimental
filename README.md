@@ -53,7 +53,7 @@ for example you could just download the router repository and work on the that o
 
 This repository here combines all repositories through git submodules.
 This has the benefit of an "all in one place experience" and you get a
-good overview over the code involved in this project.
+good overview over the code involved in this project. Note that all submodules are checked out on a **detached head**, so if you change something, commit, and switch branch to master it will be lost!
 In case you use an IDE, I recommend opening just one feature module per editor-window
 (as opposed to just opening the entire tsmean project).
 IDEs typically can handle this much better,
