@@ -1,6 +1,6 @@
 ![tsmean logo](https://s3.eu-central-1.amazonaws.com/bersling/images/tsmean-logo.png)
 
-This is a **starter kit** for webapps **completely written in typescript**.
+This is a **starter kit** for webapps **completely written in TypeScript**.
 
 The starter kit is using the following technologies:
 
@@ -11,7 +11,7 @@ The starter kit is using the following technologies:
 
 ... and that's why it's called tsmean! All of those are modern
 technologies (as of mid 2017) and well suited for development
-with typescript. You get to use typescript now
+with TypeScript. You get to use TypeScript now
 on the client **and** the server! This leads to efficiency
 through consistency. Read more about that here: www.tsmean.com.
 
@@ -57,7 +57,7 @@ good overview over the code involved in this project. Note that all submodules a
 In case you use an IDE, I recommend opening just one feature module per editor-window
 (as opposed to just opening the entire tsmean project).
 IDEs typically can handle this much better,
-for example IntelliJ can resolve Typescript imports much faster and is less laggy
+for example IntelliJ can resolve TypeScript imports much faster and is less laggy
 in general when only part of the project is opened.
 
 I actually like this workflow a lot. Open a feature module, implement changes on feature
