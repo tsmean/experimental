@@ -18,11 +18,14 @@ through consistency. Read more about that here: www.tsmean.com.
 
 # Installation
 
+**Prerequisits**
 
-You need `yarn` installed on your machine for this to work.
-It will also only work on mac or linux based systems, windows is
-not supported. If those prerequisists are met, run:
+- A mac or linux (won't run on windows yet)
+- yarn (see https://yarnpkg.com/en/docs/install)
+- git
+- angular-cli (see https://github.com/angular/angular-cli)
 
+If the prerequisits are met, run:
 
 ```
 git clone https://github.com/tsmean/tsmean your-project-name
