@@ -30,7 +30,7 @@ If the prerequisits are met, run:
 ```
 git clone https://github.com/tsmean/tsmean your-project-name
 cd your-project-name
-npm run install
+npm install
 ```
 
 ## Backend
