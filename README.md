@@ -7,6 +7,8 @@
 
 ![tsmean logo](https://s3.eu-central-1.amazonaws.com/bersling/images/tsmean-logo.png)
 
+# Pre-Alpha Release
+
 This is a **starter kit** for webapps **completely written in TypeScript**.
 
 The starter kit is using the following technologies:
