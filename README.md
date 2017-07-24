@@ -1,6 +1,6 @@
-# Pre-alpha Discalimer
+# Discalimer
 
-Note that this project is still in furious development and only a glimpse of it’s full potential is publicly visible today. To get notified when the next major public release is ready, [sign up to this mailing list](http://http://eepurl.com/cXa2aP). To apply for alpha testing, visit www.tsmean.com/alpha.
+**Note that this project is still in furious development and only a glimpse of it’s full potential is publicly visible today. To get notified when the next major public release is ready, [sign up to this mailing list](http://http://eepurl.com/cXa2aP). To apply for alpha testing, visit www.tsmean.com/alpha.**
 
 
 <hr>
