@@ -35,14 +35,14 @@ cd your-project-name
 npm install
 ```
 
-## Backend
+# Backend
 
 First `cd backend`, then:
 
 - to spin up a REST-API server `npm start`. Check it out at http://localhost:4242
 - To run the tests `npm test`
 
-## Frontend
+# Frontend
 First `cd frontend`, then:
 
 - to start the app `cd main` and run `ng serve`. Check it out on http://localhost:4200
