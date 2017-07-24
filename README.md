@@ -18,13 +18,15 @@ through consistency. Read more about that here: www.tsmean.com.
 
 # Installation
 
-**Prerequisits**
+## Prerequisits ##
 
 - node (v6 or v8) & npm (v3 or v5)
 - git
 - ts-node (`npm install -g ts-node`)
 - angular-cli (see https://github.com/angular/angular-cli)
 
+
+## Install ##
 If the prerequisits are met, run:
 
 ```
