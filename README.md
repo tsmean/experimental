@@ -1,3 +1,10 @@
+# Pre-alpha Discalimer
+
+Note that this project is still in furious development and only a glimpse of it’s full potential is publicly visible today. To get notified when the next major public release is ready, [sign up to this mailing list](http://http://eepurl.com/cXa2aP). To apply for alpha testing, visit www.tsmean.com/alpha.
+
+
+<hr>
+
 ![tsmean logo](https://s3.eu-central-1.amazonaws.com/bersling/images/tsmean-logo.png)
 
 This is a **starter kit** for webapps **completely written in TypeScript**.
