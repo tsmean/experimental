@@ -20,9 +20,9 @@ through consistency. Read more about that here: www.tsmean.com.
 
 **Prerequisits**
 
-- A mac or linux (won't run on windows yet)
-- yarn (see https://yarnpkg.com/en/docs/install)
+- node (v6 or v8) & npm (v3 or v5)
 - git
+- ts-node (`npm install -g ts-node`)
 - angular-cli (see https://github.com/angular/angular-cli)
 
 If the prerequisits are met, run:
