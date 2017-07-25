@@ -1,4 +1,13 @@
+# Disclaimer
+
+**Note that this project is still in furious development (currently it's pre-alpha) and only a glimpse of it’s full potential is publicly visible today. To get notified when the next major public release is ready, [sign up to the mailing list for releases](http://eepurl.com/cXa2aP). To apply for alpha testing, visit [www.tsmean.com/alpha](http://www.tsmean.com/alpha). To read more about the project, visit www.tsmean.com.**
+
+
+<hr>
+
 ![tsmean logo](https://s3.eu-central-1.amazonaws.com/bersling/images/tsmean-logo.png)
+
+# Pre-Alpha Release
 
 This is a **starter kit** for webapps **completely written in TypeScript**.
 
