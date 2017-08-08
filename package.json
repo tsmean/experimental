@@ -1,6 +1,6 @@
 {
   "name": "ts-mean",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Boilerplate for a TS-MEAN App",
   "dependencies": {},
   "devDependencies": {
