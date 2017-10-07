@@ -1,16 +1,17 @@
 import * as http from 'http';
 import {log} from './logger/logger';
 import {appConfig} from './config/app-config';
-import {database} from './db';
+import {database} from '../mongo-module';
 import {router} from '../router-module';
+
 
 export function main() {
 
-// Step 1) Set & Get App Configuration
+  // Step 1) Set & Get App Configuration
   appConfig.setAppConfig(process.argv[2] || 'local');
 
-// Step 2) Connect to the database
-  (<any>database()).database.connectToDatabase(appConfig.appConfig.db, (db) => {
+  // Step 2) Connect to the database
+  database.connectToDatabase(appConfig.appConfig.db, (db) => {
 
     // when connected to db:
 

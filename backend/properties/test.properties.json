@@ -4,6 +4,7 @@
     "dbuser": "notely",
     "dbpassword": "jlkajoijjjaksjkfiiq82",
     "port": 49040,
-    "dbname": "notely-test"
+    "dbname": "notely-test",
+    "testsMayDropDb": "true"
   }
 }
