@@ -14,7 +14,6 @@ import {dao} from '../mongo-module/dao';
 class Router {
 
   appRouter: express.Application = express();
-  passportState: string;
 
   // Run configuration methods on the Express instance.
   constructor(
@@ -26,7 +25,7 @@ class Router {
     this.appRouter.use(bodyParser.urlencoded({ extended: false }));
 
     // passport config
-    this.passportState = new PassportInit(dao, passwordCryptographer).init(this.appRouter);
+    new PassportInit(dao, passwordCryptographer).init(this.appRouter);
 
     // intercept favicon
     this.appRouter.get('/favicon.ico', function(req, res) {
@@ -61,5 +60,4 @@ class Router {
 }
 
 // TODO: remove concrete impl;
-export const wholeRouter = new Router(dao, passwordCryptographer);
-export const router = wholeRouter.appRouter;
+export const router = new Router(dao, passwordCryptographer).appRouter;

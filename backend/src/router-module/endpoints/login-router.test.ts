@@ -1,7 +1,7 @@
 import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
-import {router, wholeRouter} from '../router';
+import {router} from '../router';
 import * as assert from 'assert';
 import {User, userDAO} from '../../auth-module';
 import {setupTests} from '../../mongo-module';
