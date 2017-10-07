@@ -1,26 +1,29 @@
 import * as passport from 'passport';
 import * as local from 'passport-local';
-import {passwordCryptographer} from './password-cryptographer';
-import {dao} from '../mongo-module/dao';
+import {PasswordCryptographer} from './password-cryptographer';
+import {DAO} from '../dbadapter-module/dao.model';
 
-export namespace passportInit {
+export class PassportInit {
 
-  function initializePassportLocalStrategy(): boolean {
+  constructor(
+    private dao: DAO,
+    private passwordCryptographer: PasswordCryptographer
+  ) { };
+
+  private initializePassportLocalStrategy (): boolean {
     const updatedPassport = passport.use('local', new local.Strategy({
         // by default, local strategy uses username and password, we will override with email
         usernameField : 'email',
         passwordField : 'password'
-      },
-      function(email, password, done) {
-
-        dao.readOneByField('email', email, 'users', function (dbResp) {
+      }, (email, password, done) => {
+        this.dao.readOneByField('email', email, 'users', (dbResp) => {
           if (dbResp.error) {
             // It's better not to disclose whether username OR password is wrong
             return done(null, false, { message: 'Wrong password or username.' });
           } else if (!dbResp.data) {
             return done(null, false, { message: 'Wrong password or username.' });
           } else {
-            passwordCryptographer.doCompare(password, dbResp.data.password.hash).then(isMatching => {
+            this.passwordCryptographer.doCompare(password, dbResp.data.password.hash).then(isMatching => {
               if (!isMatching) {
                 return done(null, false, { message: 'Wrong password or username.' });
               } else {
@@ -29,16 +32,14 @@ export namespace passportInit {
             });
           }
         });
-
       }
     ));
     return updatedPassport ? true : false;
   }
 
-
-  export function init(appRouter): string {
+  public init (appRouter): string {
     appRouter.use(passport.initialize());
-    initializePassportLocalStrategy();
+    this.initializePassportLocalStrategy();
     return 'success';
   }
 

@@ -4,37 +4,38 @@ import {loginRouter} from './endpoints/login-router';
 import {simpleCrudRouter} from './endpoints/simple-crud-router';
 import {userRouter} from './endpoints/user-router';
 import * as bodyParser from 'body-parser';
-import {passportInit} from '../auth-module';
+import {PassportInit} from '../auth-module/passport';
+import {DAO} from '../dbadapter-module/dao.model';
+import {PasswordCryptographer, passwordCryptographer} from '../auth-module/password-cryptographer';
+import {dao} from '../mongo-module/dao';
 
 // Creates and configures an ExpressJS web server.
+
 class Router {
 
-  // ref to Express instance
-  public appRouter: express.Application;
+  appRouter: express.Application = express();
+  passportState: string;
 
   // Run configuration methods on the Express instance.
-  constructor() {
-    this.appRouter = express();
+  constructor(
+    private dao: DAO,
+    private passwordCryptographer: PasswordCryptographer
+  ) {
+
     this.appRouter.use(bodyParser.json());
     this.appRouter.use(bodyParser.urlencoded({ extended: false }));
 
     // passport config
-    passportInit.init(this.appRouter);
+    this.passportState = new PassportInit(dao, passwordCryptographer).init(this.appRouter);
 
     // intercept favicon
     this.appRouter.get('/favicon.ico', function(req, res) {
       res.status(204);
     });
 
-    this.routes();
-  }
-
-  // Configure API endpoints.
-  private routes(): void {
     /* This is just to get up and running, and to make sure what we've got is
      * working so far. This function will change when we start to add more
      * API endpoints */
-    const router = express.Router();
 
     // Allow CORS since frontend is served completely independently
     this.appRouter.use(function(req, res, next) {
@@ -56,6 +57,9 @@ class Router {
 
   }
 
+
 }
 
-export const router = new Router().appRouter;
+// TODO: remove concrete impl;
+export const wholeRouter = new Router(dao, passwordCryptographer);
+export const router = wholeRouter.appRouter;

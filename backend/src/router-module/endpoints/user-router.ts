@@ -9,10 +9,8 @@ export class UserRouter {
    * Take login handler and attach to login endpoint, but precede it with authentication
    */
   init() {
-    this.router.post('/users',
-        this.postHandler);
-    this.router.get('/users/:id',
-    this.getHandler);
+    this.router.post('/users', this.postHandler);
+    this.router.get('/users/:id', this.getHandler);
   }
 
   /**

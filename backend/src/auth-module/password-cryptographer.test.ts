@@ -10,7 +10,6 @@ describe('bcrypt', () => {
   it('should be able to encrypt & decrypt', (done) => {
 
     const mypw = 'Hello World';
-
     passwordCryptographer.doHash(mypw).then(encrypted => {
       passwordCryptographer.doCompare(mypw, encrypted).then((isMatching: boolean) => {
         expect(isMatching).to.equal(true);

@@ -1,15 +1,12 @@
 import * as bcrypt from 'bcrypt-nodejs';
-export namespace passwordCryptographer {
+import {Pass} from '../../../frontend/main/node_modules/tsickle/build/definitions/tsickle_compiler_host';
+class PasswordCryptographerImpl {
 
-  function saltRounds() {
-    return 5;
-  }
+  doHash (plaintextPassword: string): Promise<string> {
 
-  export function doHash (plaintextPassword: string): Promise<string> {
+    return new Promise((resolve, reject) => {
 
-    return new Promise(function(resolve, reject) {
-
-      bcrypt.genSalt(saltRounds(), (error, salt) => {
+      bcrypt.genSalt(this.saltRounds(), (error, salt) => {
         bcrypt.hash(plaintextPassword, salt, null, function(err, hash) {
           if (err) {
             reject(err);
@@ -23,9 +20,9 @@ export namespace passwordCryptographer {
 
   }
 
-  export function doCompare (plaintextPassword, hash): Promise<boolean> {
+  doCompare (plaintextPassword, hash): Promise<boolean> {
 
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
 
       bcrypt.compare(plaintextPassword, hash, function(err, res) {
         if (err) {
@@ -39,4 +36,14 @@ export namespace passwordCryptographer {
 
   }
 
+  private saltRounds() {
+    return 5;
+  }
+
+}
+export const passwordCryptographer: PasswordCryptographer = new PasswordCryptographerImpl();
+
+export interface PasswordCryptographer {
+  doHash (plaintextPassword: string): Promise<string>;
+  doCompare (plaintextPassword, hash): Promise<boolean>;
 }

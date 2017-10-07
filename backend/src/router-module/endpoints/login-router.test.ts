@@ -1,9 +1,8 @@
 import * as mocha from 'mocha';
 import * as chai from 'chai';
 import chaiHttp = require('chai-http');
-import {router} from '../router';
+import {router, wholeRouter} from '../router';
 import * as assert from 'assert';
-import {database} from '../../mongo-module';
 import {User, userDAO} from '../../auth-module';
 import {setupTests} from '../../mongo-module';
 

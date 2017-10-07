@@ -1,13 +1,20 @@
 import {Router, Request, Response, NextFunction} from 'express';
 import * as passport from 'passport';
+import {PassportInit} from '../../auth-module/passport';
+import {dao} from '../../mongo-module/dao';
+import {passwordCryptographer} from '../../auth-module/password-cryptographer';
 
 export class LoginRouter {
-  router: Router;
+
+  router: Router = Router();
 
   /**
-   * Take login handler and attach to login endpoint, but precede it with authentication
+   * Initialize the login
    */
-  init() {
+  constructor() {
+    /**
+     * Take login handler and attach to login endpoint, but precede it with authentication
+     */
     this.router.post('/login', passport.authenticate(
       'local',
       {
@@ -15,14 +22,6 @@ export class LoginRouter {
         failWithError: true
       }),
       this.loginHandler, this.errorHandler);
-  }
-
-  /**
-   * Initialize the login
-   */
-  constructor() {
-    this.router = Router();
-    this.init();
   }
 
   public loginHandler(req: Request, res: Response, next: NextFunction) {
@@ -48,6 +47,4 @@ export class LoginRouter {
 
 // Create the CrudRouter, and export its configured Express.Router
 const intialRouter = new LoginRouter();
-intialRouter.init();
-
 export const loginRouter = intialRouter.router;
