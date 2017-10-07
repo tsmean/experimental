@@ -7,7 +7,7 @@ import * as bodyParser from 'body-parser';
 import {PassportInit} from '../auth-module/passport';
 import {DAO} from '../dbadapter-module/dao.model';
 import {PasswordCryptographer, passwordCryptographer} from '../auth-module/password-cryptographer';
-import {dao} from '../mongo-module/dao';
+import {databaseAdapter} from '../dbadapter-module/database-adapter';
 
 // Creates and configures an ExpressJS web server.
 
@@ -60,4 +60,4 @@ class Router {
 }
 
 // TODO: remove concrete impl;
-export const router = new Router(dao, passwordCryptographer).appRouter;
+export const router = new Router(databaseAdapter.dao, passwordCryptographer).appRouter;
