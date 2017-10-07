@@ -1,6 +1,6 @@
 import {passwordCryptographer} from './password-cryptographer';
 import {User} from './user.model';
-import {CreateResponse, DatabaseResponse, ReadResponse} from '@tsmean/dbadapter';
+import {CreateResponse, DatabaseResponse, ReadResponse} from '../dbadapter-module';
 import {database} from './db';
 
 

@@ -1,6 +1,6 @@
-import {dbadapter} from '@tsmean/dbadapter';
-import * as tsmongo from '@tsmean/mongo';
-import * as tsmysql from '@tsmean/mysql';
+import {dbadapter} from '../dbadapter-module';
+import * as tsmongo from '../mongo-module';
+import * as tsmysql from '../mysql-module';
 
 const db = require('../properties/local.properties').db;
 

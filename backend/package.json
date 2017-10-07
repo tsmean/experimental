@@ -30,7 +30,7 @@
     "mysql": "^2.13.0",
     "body-parser": "^1.17.2",
     "chai-http": "^3.0.0",
-    "ts-node": "^3.0.6",
+    "ts-node": "^3.0.6"
   },
   "devDependencies": {
     "@types/node": "^8.0.15",
