@@ -1,0 +1,26 @@
+{
+  "name": "@tsmean/backend",
+  "version": "1.0.0",
+  "description": "The full backend",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "ts-node install.ts",
+    "test": "ts-node testall.ts",
+    "start": "node main-module/dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bersling/typescript-mongo-express-node-seed.git"
+  },
+  "author": "bersling@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bersling/typescript-mongo-express-node-seed/issues"
+  },
+  "homepage": "https://github.com/bersling/typescript-mongo-express-node-seed#readme",
+  "devDependencies": {
+    "@types/node": "^8.0.15",
+    "ts-node": "^3.2.1",
+    "typescript": "^2.4.2"
+  }
+}

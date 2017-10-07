@@ -1,0 +1,7 @@
+{
+  "host": "mysql.cn32tstd6wqk.eu-central-1.rds.amazonaws.com",
+  "dbuser": "tsmean",
+  "port": 3306,
+  "dbpassword": "jdj2198fjj1jjf9j1jwjd",
+  "dbname": "testdb"
+}

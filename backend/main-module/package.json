@@ -1,0 +1,32 @@
+{
+  "name": "@tsmean/mainbe",
+  "version": "0.0.0",
+  "description": "Server module.",
+  "repository": "https://github.com/tsmean/server.git",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"enter this (for some reason doesnt work through npm test):mocha --reporter spec --compilers ts:ts-node/register 'src/**/*.test.ts'\"",
+    "start": "tsc && node dist/index.js",
+    "spec": "$(npm bin)/mocha --reporter spec --compilers ts:ts-node/register --grep ${TEST} 'src/**/*.test.ts'",
+    "lint": "tslint src/**/*.ts",
+    "forever": "tsc && forever stopall && forever start dist/index.js"
+  },
+  "author": "Daniel Niederberger <bersling@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@tsmean/dbadapter": "^1.0.4",
+    "@tsmean/router": "^1.0.3",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2",
+    "winston": "^2.3.1",
+    "winston-color": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.0",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^6.0.46",
+    "@types/winston": "^2.3.0",
+    "ts-node": "^1.6.1",
+    "typescript": "^2.0.6"
+  }
+}

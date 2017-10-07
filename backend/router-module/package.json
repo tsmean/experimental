@@ -1,0 +1,42 @@
+{
+  "name": "@tsmean/router",
+  "version": "1.0.3",
+  "description": "An expressjs router module written in typescript",
+  "main": "dist/index.js",
+  "repository": "https://github.com/tsmean/router.git",
+  "author": "Daniel Niederberger <bersling@gmail.com>",
+  "license": "MIT",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "pub": "git add --all && git commit -m 'update' && git push && npm version patch && npm publish",
+    "prepare": "npm run build",
+    "build": "tsc",
+    "test": "$(npm bin)/mocha --reporter spec --timeout 15000  --compilers ts:ts-node/register 'src/**/*.test.ts'",
+    "windows_test": "mocha --reporter spec --timeout 15000 --compilers ts:ts-node/register **\\*.test.ts",
+    "spec": "$(npm bin)/mocha --reporter spec --compilers ts:ts-node/register --grep ${TEST} 'src/**/*.test.ts'",
+    "lint": "tslint src/**/*.ts"
+  },
+  "dependencies": {
+    "@tsmean/auth": "^1.0.2",
+    "@tsmean/dbadapter": "^1.0.4",
+    "@types/express": "^4.0.36",
+    "body-parser": "^1.17.2",
+    "chai": "^4.0.2",
+    "chai-http": "^3.0.0",
+    "express": "^4.15.3",
+    "mocha": "^3.4.2",
+    "mongodb": "^2.2.28",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "ts-node": "^3.0.6"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.16.3",
+    "@types/chai": "^4.0.0",
+    "@types/chai-http": "^0.0.30",
+    "@types/mocha": "^2.2.41",
+    "@types/mongodb": "^2.2.6",
+    "@types/passport": "^0.3.3",
+    "typescript": "^2.3.4"
+  }
+}

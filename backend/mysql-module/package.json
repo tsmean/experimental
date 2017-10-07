@@ -1,0 +1,40 @@
+{
+  "name": "@tsmean/mysql",
+  "version": "1.0.8",
+  "description": "A database layer for a mysql database written in typescript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "pub": "git add --all && git commit -m 'update' && git push && npm version patch && npm publish",
+    "prepare": "npm run build",
+    "build": "tsc",
+    "test": "$(npm bin)/mocha --reporter spec --timeout 30000  --compilers ts:ts-node/register 'src/**/*.test.ts'",
+    "windows_test": "mocha --reporter spec --timeout 30000 --compilers ts:ts-node/register **\\*.test.ts",
+    "spec": "$(npm bin)/mocha --reporter spec --compilers ts:ts-node/register --grep ${TEST} 'src/**/*.test.ts'",
+    "lint": "tslint src/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsmean/mysql.git"
+  },
+  "author": "Daniel Niederberger <bersling@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tsmean/mysql/issues"
+  },
+  "homepage": "https://github.com/tsmean/mysql#readme",
+  "dependencies": {
+    "@tsmean/dbadapter": "^1.0.6",
+    "chai": "^4.0.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.4.2",
+    "mysql": "^2.13.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.0",
+    "@types/mocha": "^2.2.41",
+    "@types/mysql": "^0.0.33",
+    "ts-node": "^3.0.6",
+    "typescript": "^2.3.4"
+  }
+}
