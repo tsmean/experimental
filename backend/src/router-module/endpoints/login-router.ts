@@ -3,7 +3,9 @@ import * as passport from 'passport';
 import {PassportInit} from '../../auth-module/passport';
 import {dao} from '../../mongo-module/dao';
 import {passwordCryptographer} from '../../auth-module/password-cryptographer';
+import {Controller, Post, Req, Res} from '@nestjs/common';
 
+@Controller('/login')
 export class LoginRouter {
 
   router: Router = Router();
@@ -24,7 +26,8 @@ export class LoginRouter {
       this.loginHandler, this.errorHandler);
   }
 
-  public loginHandler(req: Request, res: Response, next: NextFunction) {
+  @Post()
+  public loginHandler(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
 

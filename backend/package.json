@@ -19,6 +19,11 @@
   },
   "homepage": "https://github.com/bersling/typescript-mongo-express-node-seed#readme",
   "dependencies": {
+    "@nestjs/common": "^4.1.0",
+    "@nestjs/core": "^4.1.0",
+    "@nestjs/microservices": "^4.1.0",
+    "@nestjs/testing": "^4.1.0",
+    "@nestjs/websockets": "^4.1.0",
     "bcrypt-node": "^0.1.0",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.17.2",
@@ -30,6 +35,8 @@
     "mysql": "^2.13.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "^5.4.3",
     "ts-node": "^3.0.6",
     "winston": "^2.4.0",
     "winston-color": "^1.0.0"

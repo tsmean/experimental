@@ -4,8 +4,9 @@ import chaiHttp = require('chai-http');
 import {router} from '../router';
 import * as assert from 'assert';
 import {database} from '../../mongo-module';
-import {User, userDAO} from '../../auth-module';
 import {setupTests} from '../../mongo-module/testsetup';
+import {User} from '../../auth-module/user.model';
+import {userDAO} from '../../auth-module/user-dao';
 
 chai.use(chaiHttp);
 const expect = chai.expect;

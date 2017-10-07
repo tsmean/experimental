@@ -1,7 +1,9 @@
 import {Router, Request, Response, NextFunction} from 'express';
-import {userDAO} from '../../auth-module';
 import {dao} from '../../mongo-module';
+import {userDAO} from '../../auth-module/user-dao';
+import {Controller, Get, Post} from '@nestjs/common';
 
+@Controller()
 export class UserRouter {
   router: Router;
 
@@ -21,7 +23,8 @@ export class UserRouter {
     this.init();
   }
 
-  private postHandler(req: Request, res: Response, next: NextFunction) {
+  @Post()
+  postHandler(req: Request, res: Response, next: NextFunction) {
     userDAO.create(req.body.user, req.body.password, (dbResponse => {
       if (dbResponse.error) {
         if (dbResponse.error.message === 'User already exists') {
@@ -41,7 +44,8 @@ export class UserRouter {
     }));
   }
 
-  private getHandler(req: Request, res: Response, next: NextFunction) {
+  @Get()
+  getHandler(req: Request, res: Response, next: NextFunction) {
     const userId = req.params.id;
 
     dao.read(userId, 'users', (dbResp) => {
