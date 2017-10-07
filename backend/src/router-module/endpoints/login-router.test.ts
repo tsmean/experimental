@@ -3,15 +3,16 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import {router} from '../router';
 import * as assert from 'assert';
-import {database} from '../db';
+import {database} from '../../mongo-module';
 import {User, userDAO} from '../../auth-module';
+import {setupTests} from '../../mongo-module';
 
 chai.use(chaiHttp);
 const expect = chai.expect;
 
 describe('LoginRouter', () => {
 
-  database().setupTests.connectTestToDatabase();
+  setupTests.connectTestToDatabase();
 
   it('should be able to login', (done) => {
 

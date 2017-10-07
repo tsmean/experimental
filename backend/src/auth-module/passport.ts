@@ -1,7 +1,7 @@
 import * as passport from 'passport';
 import * as local from 'passport-local';
 import {passwordCryptographer} from './password-cryptographer';
-import {database} from '../mongo-module';
+import {dao} from '../mongo-module/dao';
 
 export namespace passportInit {
 
@@ -13,7 +13,7 @@ export namespace passportInit {
       },
       function(email, password, done) {
 
-        database.database.dao.readOneByField('email', email, 'users', function (dbResp) {
+        dao.readOneByField('email', email, 'users', function (dbResp) {
           if (dbResp.error) {
             // It's better not to disclose whether username OR password is wrong
             return done(null, false, { message: 'Wrong password or username.' });

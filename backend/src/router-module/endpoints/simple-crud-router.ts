@@ -1,6 +1,6 @@
 import {Router, Request, Response, NextFunction} from 'express';
 import {api} from '../api';
-import {database} from '../db';
+import {dao} from '../../mongo-module';
 
 export class SimpleCrudRouter {
   router: Router;
@@ -33,7 +33,7 @@ export class SimpleCrudRouter {
     const resource = req.body;
     const resourceName = req.params.resource;
 
-    database().dao.create(resource, resourceName, (dbResp) => {
+    dao.create(resource, resourceName, (dbResp) => {
       if (dbResp.error) {
         res.status(500).send({
           message: 'Server error',
@@ -59,7 +59,7 @@ export class SimpleCrudRouter {
     const resourceId = req.params.id;
     const resourceName = req.params.resource;
 
-    database().dao.read(resourceId, resourceName, (dbResp) => {
+    dao.read(resourceId, resourceName, (dbResp) => {
       if (dbResp.error) {
         res.status(500).send({
           message: 'Server error',
@@ -82,7 +82,7 @@ export class SimpleCrudRouter {
   public updateOne(req: Request, res: Response, next: NextFunction) {
     const resourceName = req.params.resource;
 
-    database().dao.update(req.body, resourceName, (dbResp) => {
+    dao.update(req.body, resourceName, (dbResp) => {
 
       if (dbResp.error) {
         res.status(500).send({
@@ -109,7 +109,7 @@ export class SimpleCrudRouter {
   public getAll(req: Request, res: Response, next: NextFunction) {
     const resourceName = req.params.resource;
 
-    database().dao.readAll(resourceName, (dbResp) => {
+    dao.readAll(resourceName, (dbResp) => {
       if (dbResp.error) {
         res.status(500).send({
           message: 'Server error',
@@ -133,7 +133,7 @@ export class SimpleCrudRouter {
     const resourceId = req.params.id;
     const resourceName = req.params.resource;
 
-    database().dao.remove(resourceId, resourceName, (dbResp) => {
+    dao.remove(resourceId, resourceName, (dbResp) => {
       if (dbResp.error) {
         res.status(500).send({
           message: 'Server error',
