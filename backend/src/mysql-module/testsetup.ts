@@ -17,7 +17,7 @@ export namespace setupTests {
 
 
 function getConfig(): DatabaseConfig {
-  return require('../properties/test.properties.json');
+  return require('./properties/test.properties.json');
 };
 
 

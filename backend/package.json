@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "ts-node install.ts",
-    "test": "ts-node testall.ts",
+    "test": "$(npm bin)/mocha --reporter spec --timeout 15000  --compilers ts:ts-node/register './src/**/*.test.ts'",
     "start": "node main-module/dist/index.js"
   },
   "repository": {
@@ -31,7 +31,8 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "ts-node": "^3.0.6",
-    "winston": "^2.4.0"
+    "winston": "^2.4.0",
+    "winston-color": "^1.0.0"
   },
   "devDependencies": {
     "@types/bcrypt-nodejs": "^0.0.30",

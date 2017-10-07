@@ -13,7 +13,7 @@ export namespace setupTests {
   }
 
   export function getConfig() {
-    return require('../properties/test.properties.json');
+    return require('./properties/test.properties.json');
   };
 
 }
