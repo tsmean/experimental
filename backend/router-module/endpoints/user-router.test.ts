@@ -4,7 +4,7 @@ import chaiHttp = require('chai-http');
 import {router} from '../router';
 import * as assert from 'assert';
 import {database} from '../db';
-import {User, userDAO} from '@tsmean/auth';
+import {User, userDAO} from '../auth';
 
 chai.use(chaiHttp);
 const expect = chai.expect;
