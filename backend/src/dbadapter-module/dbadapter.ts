@@ -2,6 +2,7 @@ import * as tsmongo from '../mongo-module';
 import * as tsmysql from '../mysql-module';
 
 export function dbadapter(databaseType: 'mongo' | 'mysql') {
+
   switch (databaseType) {
     case 'mongo':
       return tsmongo;
@@ -11,4 +12,3 @@ export function dbadapter(databaseType: 'mongo' | 'mysql') {
       throw Error('Database type not implemented!');
   }
 }
-

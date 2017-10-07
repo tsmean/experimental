@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "ts-node install.ts",
     "test": "$(npm bin)/mocha --reporter spec --timeout 15000  --compilers ts:ts-node/register './src/**/*.test.ts'",
-    "start": "node main-module/dist/index.js"
+    "start": "node ./dist/main-module/index.js"
   },
   "repository": {
     "type": "git",
