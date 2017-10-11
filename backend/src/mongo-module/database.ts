@@ -4,7 +4,7 @@ import {DatabaseConfig} from '../dbadapter-module';
 import {Component} from '@nestjs/common';
 
 @Component()
-export class Database {
+export class MongoConnector {
 
   private _database;
   private _mongoClient;
@@ -42,5 +42,3 @@ export class Database {
   };
 
 }
-
-export const database = new Database();

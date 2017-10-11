@@ -4,7 +4,7 @@ import {Test} from '@nestjs/testing';
 import {User} from '../../../shared/models/user.model';
 import {DAO} from '../dbadapter-module';
 import {PasswordCryptographerService} from '../auth-module/password-cryptographer';
-import {database} from '../mongo-module/database';
+import {MongoConnector} from '../mongo-module/database';
 describe('UserDAO', () => {
 
   let userDAO: UserDAO;
@@ -21,8 +21,8 @@ describe('UserDAO', () => {
     userDAO = module.get<UserDAO>(UserDAO);
 
     const config = require('../../properties/test.properties.json');
-    console.log(config);
-    database.connectToDatabase(config.db, (db) => {
+    const connector = new MongoConnector();
+    connector.connectToDatabase(config.db, (db) => {
       db.dropDatabase().then(() => {
         done();
       });

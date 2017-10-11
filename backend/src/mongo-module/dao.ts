@@ -1,5 +1,5 @@
 import * as mongo from 'mongodb';
-import {database} from './database';
+import {MongoConnector} from './database';
 import {
   CreateResponse, DatabaseError, DatabaseResponse, ReadResponse, UpdateResponse
 } from '../dbadapter-module';
@@ -18,8 +18,12 @@ import {Component} from '@nestjs/common';
 @Component()
 export class MongoDAO implements DAO {
 
+  constructor(
+    private connector: MongoConnector
+  ) {}
+
   public read(id, tableName: string, cb: (dbResponse: DatabaseResponse<any>) => void): void {
-    database.database.collection(tableName, (err, collection) => {
+    this.connector.database.collection(tableName, (err, collection) => {
 
       if (err) {
         cb({
@@ -55,7 +59,7 @@ export class MongoDAO implements DAO {
   }
 
   public readAll(collectionName: string, cb: (dbResponse: DatabaseResponse<any>) => void): void {
-    database.database.collection(collectionName, (err, collection) => {
+    this.connector.database.collection(collectionName, (err, collection) => {
 
       if (err) {
         cb({
@@ -98,7 +102,7 @@ export class MongoDAO implements DAO {
     fieldValue: any,
     tableName: string,
     cb: (dbResponse: DatabaseResponse<any>) => void): void {
-    database.database.collection(tableName, (err, collection) => {
+    this.connector.database.collection(tableName, (err, collection) => {
 
       if (err) {
         cb({
@@ -140,7 +144,7 @@ export class MongoDAO implements DAO {
     // deep copy object so input doesn't get mutated
     const itemCopy = JSON.parse(JSON.stringify(item));
 
-    database.database.collection(collectionName, (err: MongoError, collection) => {
+    this.connector.database.collection(collectionName, (err: MongoError, collection) => {
       if (err) {
         cb({
           error: this.mongoErrorToGeneralDbError(err)
@@ -167,7 +171,7 @@ export class MongoDAO implements DAO {
     // deep copy object so input doesn't get mutated and morph it to correct storage form
     const itemCopy = this.morphDataOnStorage(item);
 
-    database.database.collection(collectionName, (err, collection) => {
+    this.connector.database.collection(collectionName, (err, collection) => {
       if (err) {
         cb({
           error: this.mongoErrorToGeneralDbError(err)
@@ -190,7 +194,7 @@ export class MongoDAO implements DAO {
   }
 
   public remove(id: number | string, collectionName: string, cb: (dbResp: DatabaseResponse<any>) => void): void {
-    database.database.collection(collectionName, (err, collection) => {
+    this.connector.database.collection(collectionName, (err, collection) => {
       if (err) {
         cb({
           error: this.mongoErrorToGeneralDbError(err)

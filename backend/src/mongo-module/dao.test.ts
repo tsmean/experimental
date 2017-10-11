@@ -2,22 +2,26 @@ import {DatabaseResponse, ReadResponse} from '../dbadapter-module';
 import {Test} from '@nestjs/testing';
 import {MongoDAO} from './dao';
 import {DAO} from '../dbadapter-module/dao.model';
-import {database} from './database';
-
+import {MongoConnector} from './database';
 
 describe('DAO', () => {
 
   let dao: DAO;
+  let connector: MongoConnector;
 
   beforeEach(async (done) => {
 
     const module = await Test.createTestingModule({
-      components: [MongoDAO],
+      components: [
+        MongoConnector,
+        MongoDAO
+      ],
     }).compile();
 
     dao = module.get<MongoDAO>(MongoDAO);
+    connector = module.get<MongoConnector>(MongoConnector);
 
-    database.connectToDatabase(require('../../properties/test.properties.json').db, (db) => {
+    connector.connectToDatabase(require('../../properties/test.properties.json').db, (db) => {
       db.dropDatabase().then(() => {
         done();
       });

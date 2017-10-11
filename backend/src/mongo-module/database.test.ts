@@ -1,4 +1,4 @@
-import {database} from './database';
+import {MongoConnector} from './database';
 import {setupTests} from './testsetup';
 
 describe('Connect Test', () => {
@@ -11,8 +11,10 @@ describe('Connect Test', () => {
       text: 'Hello World'
     };
 
-    expect(database.database !== undefined).toBe(true);
-    database.database.collection('notes').insertOne(item, function(err, result) {
+    const connector = new MongoConnector();
+
+    expect(connector.database !== undefined).toBe(true);
+    connector.database.database.collection('notes').insertOne(item, function(err, result) {
       expect(err).toEqual(null);
       expect(result.insertedCount).toEqual(1);
       done();

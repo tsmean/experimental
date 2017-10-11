@@ -1,7 +1,7 @@
 import {appConfig} from './config/app-config';
 import { NestFactory } from '@nestjs/core';
 import {AppModule} from './app.module';
-import {database} from './mongo-module/database';
+import {MongoConnector} from './mongo-module/database';
 import * as bodyParser from 'body-parser';
 import {ValidationPipe} from './common/pipes/validation.pipe';
 
@@ -11,7 +11,9 @@ export function main() {
   appConfig.setAppConfig(process.argv[2] || 'local');
 
   // Step 2) Connect to the database
-  database.connectToDatabase(appConfig.appConfig.db, (db) => {
+  // TODO: de-hardcode
+  const connector = new MongoConnector();
+  connector.connectToDatabase(appConfig.appConfig.db, (db) => {
 
     // when connected to db:
 
