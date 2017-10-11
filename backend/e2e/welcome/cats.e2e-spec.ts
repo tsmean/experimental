@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
-import {WelcomeHtmlRouter} from '../../src/router-module/endpoints/welcome-html-router';
+import {WelcomeHtmlController} from '../../src/router-module/endpoints/welcome-html-router';
 
 describe('Welcome Router', () => {
   const server = express();
@@ -10,7 +10,7 @@ describe('Welcome Router', () => {
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
-      modules: [WelcomeHtmlRouter],
+      modules: [WelcomeHtmlController],
     }).compile();
 
     const app = module.createNestApplication(server);

@@ -1,11 +1,17 @@
-import {passwordCryptographer} from './password-cryptographer';
-import {User} from './user.model';
 import {CreateResponse, DatabaseResponse, ReadResponse} from '../dbadapter-module/database.model';
 import {dao} from '../mongo-module/dao';
+import {User} from '../../../shared/models/user.model';
+import {Component} from '@nestjs/common';
+import {PasswordCryptographerService} from '../auth-module/password-cryptographer';
 
-export namespace userDAO {
+@Component()
+export class UserDAO {
 
-  export function create(user: User, password: string, cb: (dbResponse: DatabaseResponse<CreateResponse>) => void) {
+  constructor(
+    private readonly passwordCryptographer: PasswordCryptographerService
+  ) { }
+
+   create(user: User, password: string, cb: (dbResponse: DatabaseResponse<CreateResponse>) => void) {
 
     const userCopy = JSON.parse(JSON.stringify(user));
 
@@ -15,7 +21,7 @@ export namespace userDAO {
       // This means that a database error is actually what you expect when creating a new user!
       if (dbResp.error) {
 
-        passwordCryptographer.doHash(password).then((hash: string) => {
+        this.passwordCryptographer.doHash(password).then((hash: string) => {
           userCopy.password = {
             hash: hash,
             algorithm: 'bcrypt'
@@ -24,7 +30,7 @@ export namespace userDAO {
         }, (err) => {
           return cb({
             error: {
-              message: 'Problem during hashing'
+              message: 'Problem with hashing'
             }
           });
         });
@@ -41,12 +47,12 @@ export namespace userDAO {
 
   }
 
-  export function getByMail(email: string, cb: (dbResponse: DatabaseResponse<ReadResponse>) => void) {
+   getByMail(email: string, cb: (dbResponse: DatabaseResponse<ReadResponse>) => void) {
     dao.readOneByField('email', email, 'Users', cb);
   }
 
 
-  export function getById(id: string, cb: (dbResponse: DatabaseResponse<ReadResponse>) => void) {
+   getById(id: string, cb: (dbResponse: DatabaseResponse<ReadResponse>) => void) {
     dao.read(id, 'Users', cb);
   }
 

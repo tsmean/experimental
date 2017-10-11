@@ -1,30 +1,20 @@
-import {Router, Request, Response, NextFunction} from 'express';
 import {userDAO} from '../../auth-module/user-dao';
-import {Controller, Get, Post} from '@nestjs/common';
+import {Controller, Get, Post, Req, Res} from '@nestjs/common';
 import {dao} from '../../mongo-module/dao';
+import {Request, Response} from 'express';
+import {User} from '../../../../shared/models/user.model';
+import {UserDAO} from '../../src/user/user-dao';
 
-@Controller()
-export class UserRouter {
-  router: Router;
+// STASHED
 
-  /**
-   * Take login handler and attach to login endpoint, but precede it with authentication
-   */
-  init() {
-    this.router.post('/users', this.postHandler);
-    this.router.get('/users/:id', this.getHandler);
-  }
 
-  /**
-   * Initialize the login
-   */
-  constructor() {
-    this.router = Router();
-    this.init();
-  }
+@Controller('users')
+export class UserController {
+
+
 
   @Post()
-  postHandler(req: Request, res: Response, next: NextFunction) {
+  postHandler(req: Request, res: Response) {
     userDAO.create(req.body.user, req.body.password, (dbResponse => {
       if (dbResponse.error) {
         if (dbResponse.error.message === 'User already exists') {
@@ -45,7 +35,12 @@ export class UserRouter {
   }
 
   @Get()
-  getHandler(req: Request, res: Response, next: NextFunction) {
+  async findAll(): Promise<User[]> {
+    return this.userService.findAll();
+  }
+
+  @Get(':id')
+  getHandler(@Req() req: Request, @Res() res: Response) {
     const userId = req.params.id;
 
     dao.read(userId, 'users', (dbResp) => {
@@ -66,9 +61,3 @@ export class UserRouter {
   }
 
 }
-
-// Create the CrudRouter, and export its configured Express.Router
-const intialRouter = new UserRouter();
-intialRouter.init();
-
-export const userRouter = intialRouter.router;

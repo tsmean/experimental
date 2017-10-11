@@ -1,7 +1,7 @@
 import {Controller, Get, HttpStatus, Req, Res} from '@nestjs/common';
 
-@Controller('/')
-export class WelcomeHtmlRouter {
+@Controller('')
+export class WelcomeHtmlController {
 
   @Get()
   public welcome(@Res() res) {

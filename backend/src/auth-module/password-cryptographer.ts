@@ -1,6 +1,9 @@
 import * as bcrypt from 'bcrypt-nodejs';
 import {Pass} from '../../../frontend/main/node_modules/tsickle/build/definitions/tsickle_compiler_host';
-class PasswordCryptographerImpl {
+import {Component} from '@nestjs/common';
+
+@Component()
+export class PasswordCryptographerService {
 
   doHash (plaintextPassword: string): Promise<string> {
 
@@ -41,9 +44,12 @@ class PasswordCryptographerImpl {
   }
 
 }
+
+/*
 export const passwordCryptographer: PasswordCryptographer = new PasswordCryptographerImpl();
 
 export interface PasswordCryptographer {
   doHash (plaintextPassword: string): Promise<string>;
   doCompare (plaintextPassword, hash): Promise<boolean>;
 }
+*/

@@ -1,6 +1,6 @@
 import * as passport from 'passport';
 import * as local from 'passport-local';
-import {PasswordCryptographer} from './password-cryptographer';
+import {PasswordCryptographerService} from './password-cryptographer';
 import {DAO} from '../dbadapter-module/dao.model';
 import {Component} from '@nestjs/common';
 
@@ -9,7 +9,7 @@ export class PassportInit {
 
   constructor(
     private dao: DAO,
-    private passwordCryptographer: PasswordCryptographer
+    private passwordCryptographer: PasswordCryptographerService
   ) { };
 
   private initializePassportLocalStrategy (): boolean {
