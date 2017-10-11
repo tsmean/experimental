@@ -1,6 +1,6 @@
 import {Router, Request, Response, NextFunction} from 'express';
 import {api} from '../api';
-import {dao} from '../../mongo-module';
+import {dao} from '../../mongo-module/dao';
 
 export class SimpleCrudRouter {
   router: Router;

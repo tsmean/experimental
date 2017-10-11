@@ -1,7 +1,7 @@
 import {Router, Request, Response, NextFunction} from 'express';
-import {dao} from '../../mongo-module';
 import {userDAO} from '../../auth-module/user-dao';
 import {Controller, Get, Post} from '@nestjs/common';
+import {dao} from '../../mongo-module/dao';
 
 @Controller()
 export class UserRouter {

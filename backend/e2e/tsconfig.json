@@ -5,12 +5,5 @@
     "outDir": "./dist",
     "skipLibCheck": true,
     "experimentalDecorators": true
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+  }
 }

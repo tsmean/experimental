@@ -4,18 +4,14 @@ import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 import {WelcomeHtmlRouter} from '../../src/router-module/endpoints/welcome-html-router';
 
-describe('Cats', () => {
+describe('Welcome Router', () => {
   const server = express();
   server.use(bodyParser.json());
-
-  const catsService = { findAll: () => ['test'] };
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
       modules: [WelcomeHtmlRouter],
-    })
-      .overrideComponent(CatsService).useValue(catsService)
-      .compile();
+    }).compile();
 
     const app = module.createNestApplication(server);
     await app.init();
@@ -26,7 +22,7 @@ describe('Cats', () => {
       .get('/cats')
       .expect(200)
       .expect({
-        data: catsService.findAll(),
+        data: 'hi',
       });
   });
 });

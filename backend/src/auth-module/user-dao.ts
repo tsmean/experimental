@@ -1,7 +1,7 @@
 import {passwordCryptographer} from './password-cryptographer';
 import {User} from './user.model';
-import {database, dao} from '../mongo-module';
 import {CreateResponse, DatabaseResponse, ReadResponse} from '../dbadapter-module/database.model';
+import {dao} from '../mongo-module/dao';
 
 export namespace userDAO {
 

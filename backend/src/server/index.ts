@@ -1,7 +1,7 @@
 import {appConfig} from './config/app-config';
-import {database} from '../mongo-module';
 import { NestFactory } from '@nestjs/core';
 import {AppModule} from './app.module';
+import {database} from '../mongo-module/database';
 
 export function main() {
 
