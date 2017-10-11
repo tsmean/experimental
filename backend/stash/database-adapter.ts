@@ -1,4 +1,4 @@
-import {dao} from '../mongo-module/dao';
+import {MongoDAO} from '../mongo-module/dao';
 
 const databaseType = 'mongo';
 

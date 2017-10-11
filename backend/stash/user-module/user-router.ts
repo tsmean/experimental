@@ -11,8 +11,6 @@ import {UserDAO} from '../../src/user/user-dao';
 @Controller('users')
 export class UserController {
 
-
-
   @Post()
   postHandler(req: Request, res: Response) {
     userDAO.create(req.body.user, req.body.password, (dbResponse => {

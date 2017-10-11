@@ -1,13 +1,14 @@
 import {CreateResponse, DatabaseResponse, ReadResponse} from '../dbadapter-module/database.model';
-import {dao} from '../mongo-module/dao';
 import {User} from '../../../shared/models/user.model';
 import {Component} from '@nestjs/common';
 import {PasswordCryptographerService} from '../auth-module/password-cryptographer';
+import {DAO} from '../dbadapter-module';
 
 @Component()
 export class UserDAO {
 
   constructor(
+    private readonly dao: DAO,
     private readonly passwordCryptographer: PasswordCryptographerService
   ) { }
 
@@ -15,7 +16,7 @@ export class UserDAO {
 
     const userCopy = JSON.parse(JSON.stringify(user));
 
-    dao.readOneByField('email', userCopy.email, 'users', (dbResp) => {
+    this.dao.readOneByField('email', userCopy.email, 'users', (dbResp) => {
 
       // Condition to create a new is user is no user with this email exists
       // This means that a database error is actually what you expect when creating a new user!
@@ -26,7 +27,7 @@ export class UserDAO {
             hash: hash,
             algorithm: 'bcrypt'
           };
-          dao.create(userCopy, 'users', cb);
+          this.dao.create(userCopy, 'users', cb);
         }, (err) => {
           return cb({
             error: {
@@ -48,12 +49,17 @@ export class UserDAO {
   }
 
    getByMail(email: string, cb: (dbResponse: DatabaseResponse<ReadResponse>) => void) {
-    dao.readOneByField('email', email, 'Users', cb);
+    this.dao.readOneByField('email', email, 'users', cb);
   }
 
 
    getById(id: string, cb: (dbResponse: DatabaseResponse<ReadResponse>) => void) {
-    dao.read(id, 'Users', cb);
+    this.dao.read(id, 'users', cb);
   }
+
+  getAll(cb: (dbResponse: DatabaseResponse<ReadResponse>) => void) {
+    this.dao.readAll('users', cb);
+  }
+
 
 }

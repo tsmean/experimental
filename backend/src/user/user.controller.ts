@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UseGuards, ReflectMetadata, UseInterceptors, Param } from '@nestjs/common';
+import {Controller, Get, Post, Body, UseGuards, ReflectMetadata, UseInterceptors, Param, Res} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
 import { RolesGuard } from '../common/guards/roles.guard';
@@ -17,10 +17,26 @@ export class UserController {
   ) {}
 
   @Post()
-  @Roles('admin')
-  async create(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto);
-    // this.userService.create(createUserDto);
+  // @Roles('admin')
+  async create(@Body() requestBody: {user: User, password: string}, @Res() res) {
+
+    this.userService.create(requestBody.user, requestBody.password)
+      .then(data => {
+        res.status(200).send({
+          message: 'Success',
+          status: res.status,
+          data: data
+        });
+      })
+      .catch(err => {
+        if (err.message === 'User already exists') {
+          res.statusMessage = err.message;
+          res.status(403).send();
+        } else {
+          res.statusMessage = err.message;
+          res.status(500).send(err.message);
+        }
+      });
   }
 
   @Get()

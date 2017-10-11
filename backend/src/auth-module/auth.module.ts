@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import {PassportInit} from './passport';
 import {PasswordCryptographerService} from './password-cryptographer';
 import {DbadapterModule} from '../dbadapter-module/dbadapter.module';
+import {DAO} from '../dbadapter-module';
 
 @Module({
   components: [
@@ -9,7 +10,8 @@ import {DbadapterModule} from '../dbadapter-module/dbadapter.module';
     PasswordCryptographerService
   ],
   exports: [
-    PasswordCryptographerService
+    PasswordCryptographerService,
+    DAO
   ],
   modules: [
     DbadapterModule
