@@ -1,4 +1,3 @@
-import {Router, Request, Response, NextFunction} from 'express';
 import {Controller, Get, HttpStatus, Req, Res} from '@nestjs/common';
 
 @Controller('/')
