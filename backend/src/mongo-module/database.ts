@@ -1,7 +1,9 @@
 import * as mongo from 'mongodb';
 import {Db} from 'mongodb';
 import {DatabaseConfig} from '../dbadapter-module';
+import {Component} from '@nestjs/common';
 
+@Component()
 export class Database {
 
   private _database;

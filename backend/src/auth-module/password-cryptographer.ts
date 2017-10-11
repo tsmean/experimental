@@ -1,5 +1,4 @@
 import * as bcrypt from 'bcrypt-nodejs';
-import {Pass} from '../../../frontend/main/node_modules/tsickle/build/definitions/tsickle_compiler_host';
 import {Component} from '@nestjs/common';
 
 @Component()
@@ -46,6 +45,9 @@ export class PasswordCryptographerService {
 }
 
 /*
+
+TODO: Try programming against interface..
+
 export const passwordCryptographer: PasswordCryptographer = new PasswordCryptographerImpl();
 
 export interface PasswordCryptographer {
