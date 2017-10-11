@@ -5,6 +5,7 @@ import {
 } from '../dbadapter-module';
 import {Cursor, MongoCallback, MongoClient, MongoError} from 'mongodb';
 import {DAO} from '../dbadapter-module/dao.model';
+import {Component} from '@nestjs/common';
 
 // Database Access Object
 // Everything that operates directly on the database goes here
@@ -14,7 +15,8 @@ import {DAO} from '../dbadapter-module/dao.model';
 
 // also, don't expose Mongo API directly, but program against an interface (DatabaseResponse)
 
-class MongoDAO implements DAO {
+@Component()
+export class MongoDAO implements DAO {
 
   public read(id, tableName: string, cb: (dbResponse: DatabaseResponse<any>) => void): void {
     database.database.collection(tableName, (err, collection) => {
@@ -254,4 +256,3 @@ class MongoDAO implements DAO {
 
 
 }
-export const dao = new MongoDAO();

@@ -2,6 +2,8 @@ import {appConfig} from './config/app-config';
 import { NestFactory } from '@nestjs/core';
 import {AppModule} from './app.module';
 import {database} from './mongo-module/database';
+import * as bodyParser from 'body-parser';
+import {ValidationPipe} from './common/pipes/validation.pipe';
 
 export function main() {
 
@@ -15,6 +17,10 @@ export function main() {
 
     async function bootstrap() {
       const app = await NestFactory.create(AppModule);
+
+      app.use(bodyParser.json());
+      app.useGlobalPipes(new ValidationPipe());
+
       await app.listen(4242);
     }
     bootstrap();

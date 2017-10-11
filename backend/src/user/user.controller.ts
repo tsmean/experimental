@@ -8,7 +8,7 @@ import { TransformInterceptor } from '../common/interceptors/transform.intercept
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 import {User} from '../../../shared/models/user.model';
 
-@Controller('cats')
+@Controller('users')
 @UseGuards(RolesGuard)
 @UseInterceptors(LoggingInterceptor, TransformInterceptor)
 export class UserController {

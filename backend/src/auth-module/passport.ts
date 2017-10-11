@@ -1,8 +1,8 @@
 import * as passport from 'passport';
 import * as local from 'passport-local';
 import {PasswordCryptographerService} from './password-cryptographer';
-import {DAO} from '../dbadapter-module/dao.model';
 import {Component} from '@nestjs/common';
+import {DAO} from '../dbadapter-module';
 
 @Component()
 export class PassportInit {
