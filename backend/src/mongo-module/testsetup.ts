@@ -1,6 +1,5 @@
 import {database} from './database';
 
-
 export namespace setupTests {
 
   export async function connectTestToDatabase() {

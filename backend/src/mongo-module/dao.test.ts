@@ -1,22 +1,28 @@
-import {setupTests} from './testsetup';
 import {DatabaseResponse, ReadResponse} from '../dbadapter-module';
 import {Test} from '@nestjs/testing';
 import {MongoDAO} from './dao';
 import {DAO} from '../dbadapter-module/dao.model';
+import {database} from './database';
 
 
 describe('DAO', () => {
 
-  setupTests.connectTestToDatabase();
-
   let dao: DAO;
 
-  beforeEach(async () => {
+  beforeEach(async (done) => {
+
     const module = await Test.createTestingModule({
       components: [MongoDAO],
     }).compile();
 
     dao = module.get<MongoDAO>(MongoDAO);
+
+    database.connectToDatabase(require('../../properties/test.properties.json').db, (db) => {
+      db.dropDatabase().then(() => {
+        done();
+      });
+    });
+
   });
 
   it('should be able to insert, read, update, delete', function(done) {

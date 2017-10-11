@@ -1,6 +1,9 @@
 import { Test } from '@nestjs/testing';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
+import {UserDAO} from './user-dao';
+import {PasswordCryptographerService} from '../auth-module/password-cryptographer';
+import {DAO} from '../dbadapter-module';
 
 describe('UserController', () => {
   let userController: UserController;
@@ -9,7 +12,12 @@ describe('UserController', () => {
   beforeEach(async () => {
     const module = await Test.createTestingModule({
         controllers: [UserController],
-        components: [UserService],
+        components: [
+          DAO,
+          PasswordCryptographerService,
+          UserDAO,
+          UserService
+        ],
       }).compile();
 
     userService = module.get<UserService>(UserService);
@@ -17,7 +25,7 @@ describe('UserController', () => {
   });
 
   describe('findAll', () => {
-    it('should return an array of cats', async () => {
+    it('should return an array of users', async () => {
       const result = ['test'];
       jest.spyOn(userService, 'findAll').mockImplementation(() => result);
       expect(await userController.findAll()).toBe(result);
