@@ -1,13 +1,27 @@
 import {Router, Request, Response, NextFunction} from 'express';
-import {Controller, Get} from '@nestjs/common';
+import {Controller, Get, HttpStatus, Req, Res} from '@nestjs/common';
 
 @Controller('/')
 export class WelcomeHtmlRouter {
 
   @Get()
-  public welcome(req: Request, res: Response, next: NextFunction) {
-    res.status(200)
-        .send(`<html><head><title>Welcome</title></head><body><p>Welcome to the TSMEAN Rest Api!</p></body></html>`);
+  public welcome(@Res() res) {
+    res.status(HttpStatus.OK)
+        .send(`
+<html>
+<head>
+<title>Welcome</title>
+</head>
+<body>
+  <h1>
+    Welcome to the tsmean REST-API!
+  </h1>
+  <p>
+    The REST-API can perform basic crud operations, but also has login / logout functionality.
+    <!--TODO: Describe this a little better-->
+  </p>
+</body>
+</html>`);
   }
 
 }

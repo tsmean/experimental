@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {welcomeHtmlRouter} from './endpoints/welcome-html-router';
+import {WelcomeHtmlRouter} from './endpoints/welcome-html-router';
 import {loginRouter} from './endpoints/login-router';
 import {simpleCrudRouter} from './endpoints/simple-crud-router';
 import {userRouter} from './endpoints/user-router';
@@ -44,7 +44,7 @@ class Router {
       next();
     });
 
-    this.appRouter.use('/', welcomeHtmlRouter);
+    // this.appRouter.use('/', WelcomeHtmlRouter);
 
     // API
     this.appRouter.use('/api/v1/', loginRouter);
