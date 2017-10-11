@@ -1,9 +1,4 @@
-import * as mocha from 'mocha';
-import * as chai from 'chai';
-
 import {passwordCryptographer} from './password-cryptographer';
-import * as bcrypt from 'bcrypt-nodejs';
-const expect = chai.expect;
 
 describe('bcrypt', () => {
 
@@ -12,7 +7,7 @@ describe('bcrypt', () => {
     const mypw = 'Hello World';
     passwordCryptographer.doHash(mypw).then(encrypted => {
       passwordCryptographer.doCompare(mypw, encrypted).then((isMatching: boolean) => {
-        expect(isMatching).to.equal(true);
+        expect(isMatching).toEqual(true);
         done();
       }, (err) => {
         console.error('Error while comparing:');
@@ -31,7 +26,7 @@ describe('bcrypt', () => {
 
     passwordCryptographer.doHash(mypw).then(encrypted => {
       passwordCryptographer.doCompare(mypw + ' is wrong', encrypted).then((isMatching: boolean) => {
-        expect(isMatching).to.equal(false);
+        expect(isMatching).toEqual(false);
         done();
       }, (err) => {
         console.error('Error while comparing:');
