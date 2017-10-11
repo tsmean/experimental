@@ -1,20 +1,21 @@
-import * as mocha from 'mocha';
-import * as chai from 'chai';
-import chaiHttp = require('chai-http');
-import {router} from '../router';
-
-chai.use(chaiHttp);
-const expect = chai.expect;
+import {WelcomeHtmlRouter} from './welcome-html-router';
+import { Test } from '@nestjs/testing';
 
 describe('Test simple welcome Html Router', () => {
 
-  it('should return html containing the word welcome', (done) => {
-    chai.request(router)
-        .get(`/`)
-        .then((resp) => {
-          expect((<any>resp).text).to.contain('Welcome to the TSMEAN Rest Api!');
-          done();
-        });
+  let welcomeRouter: WelcomeHtmlRouter;
+
+  beforeEach(async () => {
+    const module = await Test.createTestingModule({
+      controllers: [WelcomeHtmlRouter]
+    }).compile();
+
+    welcomeRouter = module.get<WelcomeHtmlRouter>(WelcomeHtmlRouter);
+  });
+
+  it('should return html containing the word welcome', async () => {
+    // TODO: How can I test this?
+    // expect(await welcomeRouter.welcome()).toContain('Welcome');
   });
 
 });
