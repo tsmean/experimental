@@ -1,7 +1,7 @@
 import {CreateResponse, DatabaseResponse, ReadResponse} from '../dbadapter-module/database.model';
 import {User} from '../../../shared/models/user.model';
 import {Component} from '@nestjs/common';
-import {PasswordCryptographerService} from '../auth-module/password-cryptographer';
+import {PasswordCryptographerService} from './password-cryptographer';
 import {DAO} from '../dbadapter-module';
 
 @Component()

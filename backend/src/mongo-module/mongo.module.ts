@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
 import {MongoDAO} from './dao';
+import {MongoConnector} from './database';
 
 @Module({
   components: [
-    MongoDAO
+    MongoDAO,
+    MongoConnector
   ],
   exports: [
-    MongoDAO
+    MongoDAO,
+    MongoConnector
   ]
 })
 export class MongoModule {}

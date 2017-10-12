@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import {UserDAO} from './user-dao';
-import {PasswordCryptographerService} from '../auth-module/password-cryptographer';
+import {PasswordCryptographerService} from './password-cryptographer';
 import {DAO} from '../dbadapter-module';
 
 describe('UserController', () => {
