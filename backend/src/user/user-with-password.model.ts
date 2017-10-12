@@ -1,6 +1,6 @@
-import {User} from '../../../shared/models/user.model';
+import {IUser} from '../../../shared/models/user.model';
 
-export interface UserWithPassword extends User {
+export interface UserWithPassword extends IUser {
   password: UserPassword;
 }
 

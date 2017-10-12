@@ -1,64 +1,55 @@
-import { Component } from '@nestjs/common';
-import {UserWithPassword} from './user-with-password.model';
-import {User} from '../../../shared/models/user.model';
-import {UserDAO} from './user-dao';
+import { Component, Inject } from '@nestjs/common';
+import {Repository} from 'typeorm';
+import {User, UserPassword} from './user.entity';
+import {HASHING_ALGORITHM, USER_PASSWORD_REPOSITORY_TOKEN, USER_REPOSITORY_TOKEN} from '../constants';
+import {DeepPartial} from 'typeorm/common/DeepPartial';
+import {IUser} from '../../../shared/models/user.model';
 
 @Component()
 export class UserService {
-  private readonly users: User[] = [];
-
   constructor(
-    private readonly userDAO: UserDAO
-  ) { }
+    @Inject(USER_REPOSITORY_TOKEN) private readonly userRepository: Repository<User>,
+    @Inject(USER_PASSWORD_REPOSITORY_TOKEN) private readonly userPasswordRepository: Repository<UserPassword>
+  ) {}
 
-  async create(user: User, password: string): Promise<any> {
+  // Create
+  async create(userDto: IUser, password: string): Promise<User> {
 
-    return new Promise((resolve, reject) => {
-      this.userDAO.create(user, password, (dbResponse => {
-        if (dbResponse.error) {
-          reject(dbResponse.error);
-        } else {
-          resolve(dbResponse.data);
-        }
-      }));
-    });
+    const userPassword: UserPassword = new UserPassword();
+    userPassword.hash = password;
+    userPassword.algorithm = HASHING_ALGORITHM;
 
+    const user = new User();
+    Object.assign(user, userDto);
+    user.password = userPassword;
+
+    await this.userPasswordRepository.save(userPassword); // TODO: implement a catch
+    return await this.userRepository.save(user);
   }
 
-  async findAll(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.userDAO.getAll(dbResp => {
-        if (dbResp.error) {
-          reject(dbResp.error);
-        } else {
-          resolve(dbResp.data);
-        }
-      });
-    });
+  // Read
+  async findAll(): Promise<User[]> {
+    return await this.userRepository.find();
   }
 
-  async findOneById(id): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.userDAO.getById(id, dbResp => {
-        if (dbResp.error) {
-          reject(dbResp.error);
-        } else {
-          resolve(dbResp.data);
-        }
-      });
+  async findOneById(id: number): Promise<User> {
+    return await this.userRepository.findOneById(id);
+  }
+
+  async findOneByMail(mail: string): Promise<User> {
+    return await this.userRepository.findOne({
+      mail: mail
     });
   }
 
-  async findOneByMail(mail): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.userDAO.getByMail(mail, dbResp => {
-        if (dbResp.error) {
-          reject(dbResp.error);
-        } else {
-          resolve(dbResp.data);
-        }
-      });
-    });
+  // Update
+  async update(id: number, partialEntry: DeepPartial<User>): Promise<void> {
+    return await this.userRepository.updateById(id, partialEntry);
+  }
+
+  // Delete
+  async remove(id: number): Promise<void> {
+    return await this.userRepository.removeById(id);
   }
 
 }

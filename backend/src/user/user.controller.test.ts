@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { UserController } from './user.controller';
-import { UserService } from './user.service';
+import { UserService } from './user.service.deprecated';
 import {UserDAO} from './user-dao';
 import {PasswordCryptographerService} from './password-cryptographer';
 import {DbAdapter} from '../dbadapter-module/dbadapter';

@@ -6,7 +6,7 @@ import { Roles } from '../common/decorators/roles.decorator';
 import { LoggingInterceptor } from '../common/interceptors/logging.interceptor';
 import { TransformInterceptor } from '../common/interceptors/transform.interceptor';
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
-import {User} from '../../../shared/models/user.model';
+import {IUser} from '../../../shared/models/user.model';
 
 @Controller('users')
 @UseGuards(RolesGuard)
@@ -18,7 +18,7 @@ export class UserController {
 
   @Post()
   // @Roles('admin')
-  async create(@Body() requestBody: {user: User, password: string}, @Res() res) {
+  async create(@Body() requestBody: {user: IUser, password: string}, @Res() res) {
 
     this.userService.create(requestBody.user, requestBody.password)
       .then(data => {
@@ -40,7 +40,7 @@ export class UserController {
   }
 
   @Get()
-  async findAll(): Promise<User[]> {
+  async findAll(): Promise<IUser[]> {
     return this.userService.findAll();
   }
 
