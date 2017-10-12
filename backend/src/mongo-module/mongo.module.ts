@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import {MongoDAO} from './dao';
-import {MongoConnector} from './database';
+import {MongoDAO} from './mongo-dao';
+import {MongoConnector} from './mongo-connector';
 
 @Module({
   components: [

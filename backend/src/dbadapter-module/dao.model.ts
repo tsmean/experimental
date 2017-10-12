@@ -1,5 +1,5 @@
 import {CreateResponse, DatabaseResponse, UpdateResponse} from './database.model';
-export interface DAO {
+export interface GenericCrudDao {
 
   read(id, tableName: string, cb: (dbResponse: DatabaseResponse<any>) => void): void;
   readAll(collectionName: string, cb: (dbResponse: DatabaseResponse<any>) => void): void;

@@ -2,13 +2,13 @@ import * as passport from 'passport';
 import * as local from 'passport-local';
 import { Component, Inject } from '@nestjs/common';
 import {PasswordCryptographerService} from './password-cryptographer';
-import {DAO} from '../dbadapter-module';
+import {GenericCrudDao} from '../dbadapter-module/dao.model';
 
 @Component()
 export class LocalStrategy {
   constructor(
     private readonly passwordCryptographer: PasswordCryptographerService,
-    private readonly dao: DAO
+    private readonly dao: GenericCrudDao
   ) {
     passport.use('local', new local.Strategy({
         // by default, local strategy uses username and password, we will override with email

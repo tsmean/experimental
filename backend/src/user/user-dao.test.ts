@@ -1,10 +1,10 @@
-import {setupTests} from '../mongo-module/testsetup';
 import {UserDAO} from './user-dao';
 import {Test} from '@nestjs/testing';
 import {User} from '../../../shared/models/user.model';
-import {DAO} from '../dbadapter-module';
 import {PasswordCryptographerService} from './password-cryptographer';
-import {MongoConnector} from '../mongo-module/database';
+import {MongoConnector} from '../mongo-module/mongo-connector';
+import {DbAdapter} from '../dbadapter-module/dbadapter';
+import {MongoDAO} from '../mongo-module/mongo-dao';
 describe('UserDAO', () => {
 
   let userDAO: UserDAO;
@@ -12,8 +12,9 @@ describe('UserDAO', () => {
   beforeEach(async (done) => {
     const module = await Test.createTestingModule({
       components: [
+        MongoDAO,
         UserDAO,
-        DAO,
+        DbAdapter,
         PasswordCryptographerService
       ],
     }).compile();

@@ -1,10 +1,10 @@
 import * as mongo from 'mongodb';
-import {MongoConnector} from './database';
+import {MongoConnector} from './mongo-connector';
 import {
   CreateResponse, DatabaseError, DatabaseResponse, ReadResponse, UpdateResponse
-} from '../dbadapter-module';
+} from '../dbadapter-module/database.model';
 import {Cursor, MongoCallback, MongoClient, MongoError} from 'mongodb';
-import {DAO} from '../dbadapter-module/dao.model';
+import {GenericCrudDao} from '../dbadapter-module/dao.model';
 import {Component} from '@nestjs/common';
 
 // Database Access Object
@@ -16,7 +16,7 @@ import {Component} from '@nestjs/common';
 // also, don't expose Mongo API directly, but program against an interface (DatabaseResponse)
 
 @Component()
-export class MongoDAO implements DAO {
+export class MongoDAO implements GenericCrudDao {
 
   constructor(
     private connector: MongoConnector

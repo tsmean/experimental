@@ -3,7 +3,8 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import {UserDAO} from './user-dao';
 import {PasswordCryptographerService} from './password-cryptographer';
-import {DAO} from '../dbadapter-module';
+import {DbAdapter} from '../dbadapter-module/dbadapter';
+import {MongoDAO} from '../mongo-module/mongo-dao';
 
 describe('UserController', () => {
   let userController: UserController;
@@ -13,7 +14,8 @@ describe('UserController', () => {
     const module = await Test.createTestingModule({
         controllers: [UserController],
         components: [
-          DAO,
+          MongoDAO,
+          DbAdapter,
           PasswordCryptographerService,
           UserDAO,
           UserService
@@ -24,12 +26,10 @@ describe('UserController', () => {
     userController = module.get<UserController>(UserController);
   });
 
-  describe('findAll', () => {
-    it('should return an array of users', async () => {
-      const result = ['test'];
-      jest.spyOn(userService, 'findAll').mockImplementation(() => result);
-      expect(await userController.findAll()).toBe(result);
-    });
+  it('should return an array of users', async () => {
+    const result = ['test'];
+    jest.spyOn(userService, 'findAll').mockImplementation(() => result);
+    expect(await userController.findAll()).toBe(result);
   });
 
 });

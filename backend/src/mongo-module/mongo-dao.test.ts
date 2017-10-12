@@ -1,12 +1,12 @@
-import {DatabaseResponse, ReadResponse} from '../dbadapter-module';
 import {Test} from '@nestjs/testing';
-import {MongoDAO} from './dao';
-import {DAO} from '../dbadapter-module/dao.model';
-import {MongoConnector} from './database';
+import {MongoDAO} from './mongo-dao';
+import {GenericCrudDao} from '../dbadapter-module/dao.model';
+import {MongoConnector} from './mongo-connector';
+import {DatabaseResponse, ReadResponse} from '../dbadapter-module/database.model';
 
-describe('DAO', () => {
+describe('Mongo DAO', () => {
 
-  let dao: DAO;
+  let dao: GenericCrudDao;
   let connector: MongoConnector;
 
   beforeEach(async (done) => {
@@ -15,7 +15,7 @@ describe('DAO', () => {
       components: [
         MongoConnector,
         MongoDAO
-      ],
+      ]
     }).compile();
 
     dao = module.get<MongoDAO>(MongoDAO);

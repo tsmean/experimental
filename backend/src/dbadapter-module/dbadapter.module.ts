@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import {MongoModule} from '../mongo-module/mongo.module';
-import {DAO} from '.';
+import {DbAdapter} from './dbadapter';
 
 @Module({
   components: [
-    DAO
+    DbAdapter
   ],
   exports: [
-    DAO
+    DbAdapter
   ],
   modules: [
     MongoModule

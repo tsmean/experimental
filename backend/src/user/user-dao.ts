@@ -2,13 +2,13 @@ import {CreateResponse, DatabaseResponse, ReadResponse} from '../dbadapter-modul
 import {User} from '../../../shared/models/user.model';
 import {Component} from '@nestjs/common';
 import {PasswordCryptographerService} from './password-cryptographer';
-import {DAO} from '../dbadapter-module';
+import {GenericCrudDao} from '../dbadapter-module/dao.model';
 
 @Component()
 export class UserDAO {
 
   constructor(
-    private readonly dao: DAO,
+    private readonly dao: GenericCrudDao,
     private readonly passwordCryptographer: PasswordCryptographerService
   ) { }
 
