@@ -46,7 +46,7 @@ export class UserController {
 
   @Get(':id')
   findOne(@Param('id', new ParseIntPipe()) id) {
-    // logic
+    return this.userService.findOneById(id);
   }
 
 }

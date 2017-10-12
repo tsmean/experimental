@@ -37,4 +37,28 @@ export class UserService {
     });
   }
 
+  async findOneById(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.userDAO.getById(id, dbResp => {
+        if (dbResp.error) {
+          reject(dbResp.error);
+        } else {
+          resolve(dbResp.data);
+        }
+      });
+    });
+  }
+
+  async findOneByMail(mail): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.userDAO.getByMail(mail, dbResp => {
+        if (dbResp.error) {
+          reject(dbResp.error);
+        } else {
+          resolve(dbResp.data);
+        }
+      });
+    });
+  }
+
 }
