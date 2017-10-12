@@ -6,27 +6,17 @@ import {ValidationPipe} from './common/pipes/validation.pipe';
 
 export function main() {
 
-  // Step 1) Set & Get App Configuration
   appConfig.setAppConfig(process.argv[2] || 'local');
 
-  // Step 2) Connect to the database
-  // TODO: de-hardcode
-  connector.connectToDatabase(appConfig.appConfig.db, (db) => {
+  async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
 
-    // when connected to db:
+    app.use(bodyParser.json());
+    app.useGlobalPipes(new ValidationPipe());
 
-    async function bootstrap() {
-      const app = await NestFactory.create(AppModule);
-
-      app.use(bodyParser.json());
-      app.useGlobalPipes(new ValidationPipe());
-
-      await app.listen(4242);
-    }
-    bootstrap();
-
-
-  });
+    await app.listen(4242);
+  }
+  bootstrap();
 
 };
 

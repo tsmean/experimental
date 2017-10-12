@@ -1,10 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { UserController } from './user.controller';
-import { UserService } from './user.service.deprecated';
-import {UserDAO} from './user-dao';
 import {PasswordCryptographerService} from './password-cryptographer';
-import {DbAdapter} from '../dbadapter-module/dbadapter';
-import {MongoDAO} from '../mongo-module/mongo-dao';
+import {UserService} from './user.service';
 
 describe('UserController', () => {
   let userController: UserController;
@@ -14,10 +11,7 @@ describe('UserController', () => {
     const module = await Test.createTestingModule({
         controllers: [UserController],
         components: [
-          MongoDAO,
-          DbAdapter,
           PasswordCryptographerService,
-          UserDAO,
           UserService
         ],
       }).compile();

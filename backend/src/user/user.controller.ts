@@ -7,6 +7,7 @@ import { LoggingInterceptor } from '../common/interceptors/logging.interceptor';
 import { TransformInterceptor } from '../common/interceptors/transform.interceptor';
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 import {IUser} from '../../../shared/models/user.model';
+import {User} from './user.entity';
 
 @Controller('users')
 @UseGuards(RolesGuard)
@@ -40,7 +41,7 @@ export class UserController {
   }
 
   @Get()
-  async findAll(): Promise<IUser[]> {
+  async findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
 

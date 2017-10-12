@@ -1,6 +1,5 @@
 import {Module, NestModule, RequestMethod} from '@nestjs/common';
 import { UserController } from './user.controller';
-import {DbadapterModule} from '../dbadapter-module/dbadapter.module';
 import {PasswordCryptographerService} from './password-cryptographer';
 import {LocalStrategy} from './local.strategy';
 import {MiddlewaresConsumer} from '@nestjs/common/interfaces/middlewares';
@@ -13,9 +12,6 @@ import {UserService} from './user.service';
     UserService,
     PasswordCryptographerService,
     LocalStrategy
-  ],
-  modules: [
-    DbadapterModule
   ]
 })
 export class UserModule implements NestModule {
