@@ -1,6 +1,21 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn} from 'typeorm';
 
 @Entity()
+export class UserPassword {
+
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  hash: string;
+
+  @Column()
+  algorithm: string;
+
+}
+
+
+@Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -17,19 +32,5 @@ export class User {
   @OneToOne(type => UserPassword)
   @JoinColumn()
   password: UserPassword;
-
-}
-
-@Entity()
-export class UserPassword {
-
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  hash: string;
-
-  @Column()
-  algorithm: string;
 
 }
