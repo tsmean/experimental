@@ -1,9 +1,10 @@
 import { Component, Inject } from '@nestjs/common';
 import {Repository} from 'typeorm';
-import {User, UserPassword} from './user.entity';
+import {User} from './user.entity';
 import {HASHING_ALGORITHM, USER_PASSWORD_REPOSITORY_TOKEN, USER_REPOSITORY_TOKEN} from '../constants';
 import {DeepPartial} from 'typeorm/common/DeepPartial';
 import {IUser} from '../../../shared/models/user.model';
+import {UserPassword} from './user-password.entity';
 
 @Component()
 export class UserService {

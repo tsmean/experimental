@@ -13,7 +13,8 @@ export const databaseProviders = [
       database: 'testdb',
       entities: [
         __dirname + '/../**/*.entity{.ts,.js}'
-      ]
+      ],
+      autoSchemaSync: true,
     })
   }
 ];
