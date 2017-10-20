@@ -1,6 +1,6 @@
 import {Entity} from 'typeorm/decorator/entity/Entity';
 import {Column, PrimaryGeneratedColumn} from 'typeorm';
-d
+
 @Entity()
 export class UserPassword {
 
