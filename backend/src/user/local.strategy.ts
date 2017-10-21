@@ -3,7 +3,7 @@ import * as local from 'passport-local';
 import { Component, Inject } from '@nestjs/common';
 import {UserService} from './user.service';
 import {PASSWORD_CRYPTOGRAPHER_TOKEN} from './constants';
-import {PasswordCryptographerService} from './password-cryptographer.interface';
+import {PasswordCryptographerService} from './password-cryptographer/password-cryptographer.interface';
 
 @Component()
 export class LocalStrategy {
@@ -16,7 +16,7 @@ export class LocalStrategy {
         usernameField : 'email',
         passwordField : 'password'
       }, (email, password, done) => {
-        this.userService.findOneByMail(email)
+        this.userService.findOneByEmail(email)
           .then(user => {
             this.passwordCryptographer.doCompare(password, user.password.hash).then(isMatching => {
               if (!isMatching) {

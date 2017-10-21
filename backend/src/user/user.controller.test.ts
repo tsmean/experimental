@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { UserController } from './user.controller';
-import {PasswordCryptographerServiceImpl} from './password-cryptographer';
+import {PasswordCryptographerServiceImpl} from './password-cryptographer/password-cryptographer';
 import {UserService} from './user.service';
 
 describe('UserController', () => {

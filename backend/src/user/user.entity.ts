@@ -12,8 +12,12 @@ export class User {
   @Column({ length: 35 })
   lastName: string;
 
-  @Column({ length: 50})
-  mail: string;
+
+  @Column({
+    length: 50,
+    unique: true
+  })
+  email: string;
 
   @OneToOne(type => UserPassword)
   @JoinColumn()

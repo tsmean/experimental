@@ -14,6 +14,7 @@ export class UserService {
   ) {}
 
   // Create
+  // Precondition: the user needs to have a unique email address
   async create(userDto: IUser, password: string): Promise<User> {
 
     const userPassword: UserPassword = new UserPassword();
@@ -26,6 +27,7 @@ export class UserService {
 
     await this.userPasswordRepository.save(userPassword); // TODO: implement a catch
     return await this.userRepository.save(user);
+
   }
 
   // Read
@@ -37,9 +39,23 @@ export class UserService {
     return await this.userRepository.findOneById(id);
   }
 
-  async findOneByMail(mail: string): Promise<User> {
-    return await this.userRepository.findOne({
-      mail: mail
+  findOneByEmail(email: string): Promise<User> {
+    return this.userRepository.findOne({
+      email: email
+    });
+  }
+
+  emailIsTaken (email: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.findOneByEmail(email).then(user => {
+        if (user) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      }).catch(err => {
+        reject(err);
+      });
     });
   }
 

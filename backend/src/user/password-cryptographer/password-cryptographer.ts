@@ -10,7 +10,7 @@ export class PasswordCryptographerServiceImpl implements PasswordCryptographerSe
     return new Promise((resolve, reject) => {
 
       bcrypt.genSalt(this.saltRounds(), (error, salt) => {
-        bcrypt.hash(plaintextPassword, salt, null, function(err, hash) {
+        bcrypt.hash(plaintextPassword, salt, null, (err, hash) => {
           if (err) {
             reject(err);
           } else {
@@ -27,7 +27,7 @@ export class PasswordCryptographerServiceImpl implements PasswordCryptographerSe
 
     return new Promise((resolve, reject) => {
 
-      bcrypt.compare(plaintextPassword, hash, function(err, res) {
+      bcrypt.compare(plaintextPassword, hash, (err, res) => {
         if (err) {
           reject(err);
         } else {
