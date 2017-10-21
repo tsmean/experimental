@@ -1,13 +1,14 @@
 import * as passport from 'passport';
 import * as local from 'passport-local';
 import { Component, Inject } from '@nestjs/common';
-import {PasswordCryptographerService} from './password-cryptographer';
 import {UserService} from './user.service';
+import {PASSWORD_CRYPTOGRAPHER_TOKEN} from './constants';
+import {PasswordCryptographerService} from './password-cryptographer.interface';
 
 @Component()
 export class LocalStrategy {
   constructor(
-    private readonly passwordCryptographer: PasswordCryptographerService,
+    @Inject(PASSWORD_CRYPTOGRAPHER_TOKEN) private readonly passwordCryptographer: PasswordCryptographerService,
     private readonly userService: UserService
   ) {
     passport.use('local', new local.Strategy({
@@ -29,8 +30,6 @@ export class LocalStrategy {
             return done(null, false, { message: 'Wrong password or username.' });
           });
       }
-
-
     ));
   }
 

@@ -2,7 +2,7 @@ import {Test} from '@nestjs/testing';
 import {UserService} from './user.service';
 import {userProviders} from './user.providers';
 import {databaseProviders} from '../database/database.providers';
-import {IUser} from '../../../shared/models/user.model';
+import {IUser} from '../../../shared/src/models/user.model';
 
 describe('user service', () => {
 

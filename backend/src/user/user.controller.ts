@@ -1,13 +1,12 @@
 import {Controller, Get, Post, Body, UseGuards, ReflectMetadata, UseInterceptors, Param, Res} from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UserService } from './user.service';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
 import { LoggingInterceptor } from '../common/interceptors/logging.interceptor';
 import { TransformInterceptor } from '../common/interceptors/transform.interceptor';
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
-import {IUser} from '../../../shared/models/user.model';
 import {User} from './user.entity';
+import {CreateUserDto} from '../../../shared/src/dto/user/create-user.dto';
 
 @Controller('users')
 @UseGuards(RolesGuard)
@@ -19,7 +18,7 @@ export class UserController {
 
   @Post()
   // @Roles('admin')
-  async create(@Body() requestBody: {user: IUser, password: string}, @Res() res) {
+  async create(@Body() requestBody: CreateUserDto, @Res() res) {
 
     this.userService.create(requestBody.user, requestBody.password)
       .then(data => {

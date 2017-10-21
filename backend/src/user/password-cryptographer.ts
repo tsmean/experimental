@@ -1,8 +1,9 @@
 import * as bcrypt from 'bcrypt-nodejs';
 import {Component} from '@nestjs/common';
+import {PasswordCryptographerService} from './password-cryptographer.interface';
 
 @Component()
-export class PasswordCryptographerService {
+export class PasswordCryptographerServiceImpl implements PasswordCryptographerService {
 
   doHash (plaintextPassword: string): Promise<string> {
 
@@ -43,15 +44,3 @@ export class PasswordCryptographerService {
   }
 
 }
-
-/*
-
-TODO: Try programming against interface..
-
-export const passwordCryptographer: PasswordCryptographer = new PasswordCryptographerImpl();
-
-export interface PasswordCryptographer {
-  doHash (plaintextPassword: string): Promise<string>;
-  doCompare (plaintextPassword, hash): Promise<boolean>;
-}
-*/

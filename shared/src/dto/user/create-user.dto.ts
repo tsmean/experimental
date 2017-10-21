@@ -1,5 +1,5 @@
 import { IsString, IsInt } from 'class-validator';
-import {IUser} from '../../../../shared/models/user.model';
+import {IUser} from '../../models/user.model';
 
 export class CreateUserDto {
 
@@ -8,5 +8,6 @@ export class CreateUserDto {
 
   @IsString()
   readonly password: string;
+
 
 }

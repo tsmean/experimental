@@ -1,16 +1,16 @@
-import {PasswordCryptographerService} from './password-cryptographer';
+import {PasswordCryptographerServiceImpl} from './password-cryptographer';
 import {Test} from '@nestjs/testing';
 
 describe('bcrypt', () => {
 
-  let passwordCryptographer: PasswordCryptographerService;
+  let passwordCryptographer: PasswordCryptographerServiceImpl;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
-      components: [PasswordCryptographerService],
+      components: [PasswordCryptographerServiceImpl],
     }).compile();
 
-    passwordCryptographer = module.get<PasswordCryptographerService>(PasswordCryptographerService);
+    passwordCryptographer = module.get<PasswordCryptographerServiceImpl>(PasswordCryptographerServiceImpl);
   });
 
   it('should be able to encrypt & decrypt', (done) => {

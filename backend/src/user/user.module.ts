@@ -1,19 +1,24 @@
 import {Module, NestModule, RequestMethod} from '@nestjs/common';
 import { UserController } from './user.controller';
-import {PasswordCryptographerService} from './password-cryptographer';
+import {PasswordCryptographerServiceImpl} from './password-cryptographer';
 import {LocalStrategy} from './local.strategy';
 import {MiddlewaresConsumer} from '@nestjs/common/interfaces/middlewares';
 import * as passport from 'passport';
 import {UserService} from './user.service';
 import {userProviders} from './user.providers';
 import {DatabaseModule} from '../database/database.module';
+import {PasswordCryptographerService} from './password-cryptographer.interface';
+import {PASSWORD_CRYPTOGRAPHER_TOKEN} from './constants';
 
 @Module({
   controllers: [UserController],
   components: [
     ...userProviders,
+    {
+      provide: PASSWORD_CRYPTOGRAPHER_TOKEN,
+      useClass: PasswordCryptographerServiceImpl
+    },
     UserService,
-    PasswordCryptographerService,
     LocalStrategy
   ],
   modules: [DatabaseModule]

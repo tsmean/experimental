@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { UserController } from './user.controller';
-import {PasswordCryptographerService} from './password-cryptographer';
+import {PasswordCryptographerServiceImpl} from './password-cryptographer';
 import {UserService} from './user.service';
 
 describe('UserController', () => {
@@ -11,7 +11,7 @@ describe('UserController', () => {
     const module = await Test.createTestingModule({
         controllers: [UserController],
         components: [
-          PasswordCryptographerService,
+          PasswordCryptographerServiceImpl,
           UserService
         ],
       }).compile();

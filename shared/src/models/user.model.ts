@@ -1,4 +1,4 @@
-import {Resource} from '../../frontend/resource/src/app/resource/resource';
+import {Resource} from '../../../frontend/resource/src/app/resource/resource';
 
 export interface IUser extends Resource {
   id?: number;
