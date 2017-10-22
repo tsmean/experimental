@@ -14,7 +14,9 @@ export class Log {
       level: 'debug',
       format: winston.format.json(),
       transports: [
-        new winston.transports.Console()
+        // hack to put everything in stdout so you get a streamlined console history.
+        // see https://github.com/winstonjs/winston/issues/814
+        new winston.transports.Console({stderrLevels: []})
       ]
     });
 
