@@ -1,4 +1,4 @@
-import * as bunyan from 'bunyan';
+const winston = require('winston');
 import {Component} from '@nestjs/common';
 
 @Component()
@@ -10,15 +10,19 @@ export class Log {
   readonly error;
 
   constructor() {
-    const bunyanLogger = bunyan.createLogger({
-      name: 'logger',
-      level: 0
+    const logger = winston.createLogger({
+      level: 'debug',
+      format: winston.format.json(),
+      transports: [
+        new winston.transports.Console()
+      ]
     });
 
-    this.info = bunyanLogger.info.bind(bunyanLogger);
-    this.warn = bunyanLogger.warn.bind(bunyanLogger);
-    this.debug = bunyanLogger.debug.bind(bunyanLogger);
-    this.error = bunyanLogger.error.bind(bunyanLogger);
+    this.info = logger.info.bind(logger);
+    this.warn = logger.warn.bind(logger);
+    this.debug = logger.debug.bind(logger);
+    this.error = logger.error.bind(logger);
+
   }
 
 }
