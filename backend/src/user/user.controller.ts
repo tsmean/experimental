@@ -56,7 +56,6 @@ export class UserController {
   @Get(':idOrEmail')
   findOneById(@Param('idOrEmail') idOrEmail): Promise<User> {
     const isEmail = emailValidator.simpleCheck(idOrEmail);
-    console.log(isEmail, idOrEmail);
     return isEmail ?
       this.userService.findOneByEmail(idOrEmail) :
       this.userService.findOneById(parseInt(idOrEmail, 10));
