@@ -34,14 +34,14 @@ describe('UserController', () => {
   it('should be able to find one user by id', async (done) => {
     const user = exampleUser(1);
     jest.spyOn(userService, 'findOneById').mockImplementation(() => user);
-    expect(await userController.findOneById(1)).toBe(user);
+    expect(await userController.findOne(1)).toBe(user);
     done();
   });
 
   it('should be able to find one user by email', async (done) => {
     const user = exampleUser(1);
     jest.spyOn(userService, 'findOneByEmail').mockImplementation(() => user);
-    const returnedUser = await userController.findOneByEmail('hans@wurst.de');
+    const returnedUser = await userController.findOne('hans@wurst.de');
     expect(returnedUser).toBe(user);
     done();
   });

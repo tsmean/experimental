@@ -54,7 +54,7 @@ export class UserController {
    * Duck-Typed Input: could either be an integer for the id or the e-mail address of the user
    */
   @Get(':idOrEmail')
-  findOneById(@Param('idOrEmail') idOrEmail): Promise<User> {
+  findOne(@Param('idOrEmail') idOrEmail): Promise<User> {
     const isEmail = emailValidator.simpleCheck(idOrEmail);
     return isEmail ?
       this.userService.findOneByEmail(idOrEmail) :
