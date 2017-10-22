@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, UseGuards, ReflectMetadata, UseInterceptors, Param, Res} from '@nestjs/common';
+import {Controller, Get, Post, Body, UseGuards, ReflectMetadata, UseInterceptors, Param, Res, Query} from '@nestjs/common';
 import { UserService } from './user.service';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
@@ -50,17 +50,16 @@ export class UserController {
     return this.userService.find(options || defaultOptions);
   }
 
-  @Get(':id')
-  findOneById(@Param('id', new ParseIntPipe()) id) {
-    console.log('searching by id...');
-    return this.userService.findOneById(id);
+  /**
+   * Duck-Typed Input: could either be an integer for the id or the e-mail address of the user
+   */
+  @Get(':idOrEmail')
+  findOneById(@Param('idOrEmail') idOrEmail): Promise<User> {
+    const isEmail = emailValidator.simpleCheck(idOrEmail);
+    console.log(isEmail, idOrEmail);
+    return isEmail ?
+      this.userService.findOneByEmail(idOrEmail) :
+      this.userService.findOneById(parseInt(idOrEmail, 10));
   }
-
-  @Get('?email')
-  findOneByEmail(@Param('email') email) {
-    console.log('searching by email...');
-    return this.userService.findOneByEmail(email);
-  }
-
 
 }
