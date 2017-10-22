@@ -8,6 +8,7 @@ import {UserService} from './user.service';
 import {userProviders} from './user.providers';
 import {DatabaseModule} from '../database/database.module';
 import {PASSWORD_CRYPTOGRAPHER_TOKEN} from './constants';
+import {LoggerModule} from '../logger/logger.module';
 
 @Module({
   controllers: [UserController],
@@ -20,7 +21,10 @@ import {PASSWORD_CRYPTOGRAPHER_TOKEN} from './constants';
     UserService,
     LocalStrategy
   ],
-  modules: [DatabaseModule]
+  modules: [
+    DatabaseModule,
+    LoggerModule
+  ]
 })
 export class UserModule implements NestModule {
   configure(consumer: MiddlewaresConsumer) {

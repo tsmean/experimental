@@ -8,11 +8,18 @@ export const emailValidator: EmailValidator = {
       };
       resolve(emailValidation);
     });
+  },
+
+  simpleCheck: (email: string): boolean => {
+    const re = /\S+@\S+\.\S+/;
+    return  re.test(email);
   }
+
 };
 
 interface EmailValidator {
   readonly validateEmail: (email: string) => Promise<EmailValidation>;
+  readonly simpleCheck: (email: string) => boolean;
 }
 
 export interface EmailValidation {

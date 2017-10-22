@@ -3,6 +3,7 @@ import {UserService} from './user.service';
 import {userProviders} from './user.providers';
 import {databaseProviders} from '../database/database.providers';
 import {IUser} from '../../../shared/src/models/user.model';
+import {Log} from '../logger/logger';
 
 describe('user service', () => {
 
@@ -16,6 +17,7 @@ describe('user service', () => {
   beforeAll(async () => {
     const module = await Test.createTestingModule({
       components: [
+        Log,
         ...databaseProviders,
         ...userProviders,
         UserService],
