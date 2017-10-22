@@ -2,16 +2,21 @@ import { Test } from '@nestjs/testing';
 import { UserController } from './user.controller';
 import {PasswordCryptographerServiceImpl} from './password-cryptographer/password-cryptographer';
 import {UserService} from './user.service';
+import {User} from './user.entity';
+import {databaseProviders} from '../database/database.providers';
+import {userProviders} from './user.providers';
 
 describe('UserController', () => {
   let userController: UserController;
   let userService: UserService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module = await Test.createTestingModule({
         controllers: [UserController],
         components: [
           PasswordCryptographerServiceImpl,
+          ...databaseProviders,
+          ...userProviders,
           UserService
         ],
       }).compile();
@@ -20,10 +25,39 @@ describe('UserController', () => {
     userController = module.get<UserController>(UserController);
   });
 
-  it('should return an array of users', async () => {
-    const result = ['test'];
-    jest.spyOn(userService, 'findAll').mockImplementation(() => result);
-    expect(await userController.findAll()).toBe(result);
+  it('should be able to find users', async () => {
+    const users: User[] = [exampleUser(1), exampleUser(2)];
+    jest.spyOn(userService, 'find').mockImplementation(() => users);
+    expect(await userController.find()).toBe(users);
   });
+
+  it('should be able to find one user by id', async (done) => {
+    const user = exampleUser(1);
+    jest.spyOn(userService, 'findOneById').mockImplementation(() => user);
+    expect(await userController.findOneById(1)).toBe(user);
+    done();
+  });
+
+  it('should be able to find one user by email', async (done) => {
+    const user = exampleUser(1);
+    jest.spyOn(userService, 'findOneByEmail').mockImplementation(() => user);
+    const returnedUser = await userController.findOneByEmail('hans@wurst.de');
+    expect(returnedUser).toBe(user);
+    done();
+  });
+
+  function exampleUser(id: number): User {
+    return {
+      id: id,
+      email: `hans${1}@wurst.de`,
+      firstName: 'Hans',
+      lastName: 'Wurst',
+      password: {
+        hash: 'jkskljsljkjskljksl',
+        algorithm: 'bcrypt',
+        id: id
+      }
+    };
+  }
 
 });

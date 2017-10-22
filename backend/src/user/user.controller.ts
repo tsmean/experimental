@@ -7,6 +7,8 @@ import { TransformInterceptor } from '../common/interceptors/transform.intercept
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 import {User} from './user.entity';
 import {CreateUserDto} from '../../../shared/src/dto/user/create-user.dto';
+import {FindManyOptions} from 'typeorm';
+import {emailValidator} from '../../../shared/src/email-validator/email-validator.service';
 
 @Controller('users')
 @UseGuards(RolesGuard)
@@ -40,13 +42,25 @@ export class UserController {
   }
 
   @Get()
-  async findAll(): Promise<User[]> {
-    return this.userService.findAll();
+  async find(options?: FindManyOptions<User>): Promise<User[]> {
+    const defaultOptions = {
+      take: 100,
+      skip: 0
+    };
+    return this.userService.find(options || defaultOptions);
   }
 
   @Get(':id')
-  findOne(@Param('id', new ParseIntPipe()) id) {
+  findOneById(@Param('id', new ParseIntPipe()) id) {
+    console.log('searching by id...');
     return this.userService.findOneById(id);
   }
+
+  @Get('?email')
+  findOneByEmail(@Param('email') email) {
+    console.log('searching by email...');
+    return this.userService.findOneByEmail(email);
+  }
+
 
 }

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@nestjs/common';
-import {Repository} from 'typeorm';
+import {FindManyOptions, Repository} from 'typeorm';
 import {User} from './user.entity';
 import {HASHING_ALGORITHM, USER_PASSWORD_REPOSITORY_TOKEN, USER_REPOSITORY_TOKEN} from './constants';
 import {DeepPartial} from 'typeorm/common/DeepPartial';
@@ -31,8 +31,12 @@ export class UserService {
   }
 
   // Read
-  async findAll(): Promise<User[]> {
-    return await this.userRepository.find();
+  async find(options?: FindManyOptions<User>): Promise<User[]> {
+    const defaultOptions = {
+      take: 100,
+      skip: 0
+    };
+    return await this.userRepository.find(options || defaultOptions);
   }
 
   async findOneById(id: number): Promise<User> {
