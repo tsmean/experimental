@@ -9,8 +9,12 @@ describe('user service', () => {
 
   let userService: UserService;
 
-  beforeEach(async () => {
-
+  /**
+   * Can't be beforeEach here, or else you'll get error since JEST runs in parallel:
+   * Cannot create a new connection named "default",
+   * because connection with such name already exist and it now has an active connection session.
+   */
+  beforeAll(async () => {
     const module = await Test.createTestingModule({
       components: [
         ...databaseProviders,
@@ -32,19 +36,20 @@ describe('user service', () => {
     };
 
     userService.create(user, 'mySuperSecurePasswordIXJAJA').then(resp => {
-      console.log('done', resp);
-      done();
+      if (resp.id !== undefined) {
+        done();
+      }
     });
 
   });
 
-  // it('should be find all users', (done) => {
-  //
-  //   userService.findAll().then(resp => {
-  //     console.log('done', resp);
-  //     done();
-  //   });
-  //
-  // });
+
+  it('should be able to find all users', (done) => {
+    userService.findAll().then(resp => {
+      console.log(resp);
+      expect(Array.isArray(resp)).toBe(true);
+      done();
+    });
+  });
 
 });

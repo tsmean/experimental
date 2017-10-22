@@ -46,16 +46,8 @@ export class UserService {
   }
 
   emailIsTaken (email: string): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this.findOneByEmail(email).then(user => {
-        if (user) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      }).catch(err => {
-        reject(err);
-      });
+    return this.findOneByEmail(email).then(user => {
+      return !!user;
     });
   }
 

@@ -1,5 +1,5 @@
-export namespace EmailValidator {
-  export function validateEmail(email: string): Promise<EmailValidation> {
+export const emailValidator: EmailValidator = {
+  validateEmail: (email: string): Promise<EmailValidation> => {
     return new Promise((resolve, reject) => {
       const re = /\S+@\S+\.\S+/;
       const isValid =  re.test(email);
@@ -9,6 +9,10 @@ export namespace EmailValidator {
       resolve(emailValidation);
     });
   }
+};
+
+interface EmailValidator {
+  readonly validateEmail: (email: string) => Promise<EmailValidation>;
 }
 
 export interface EmailValidation {
