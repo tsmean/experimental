@@ -1,5 +1,5 @@
-export namespace PasswordValidator {
-  export function validatePassword(password: string): Promise<PasswordValidation> {
+export abstract class PasswordValidator {
+  validatePassword(password: string): Promise<PasswordValidation> {
     return new Promise((resolve, reject) => {
 
       const passwordIsLongEnough = password.length >= 6;

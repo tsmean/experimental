@@ -9,6 +9,7 @@ import {userProviders} from './user.providers';
 import {DatabaseModule} from '../database/database.module';
 import {PASSWORD_CRYPTOGRAPHER_TOKEN} from './constants';
 import {LoggerModule} from '../logger/logger.module';
+import {EmailValidatorModule} from '../validation/email/email-validator.module';
 
 @Module({
   controllers: [UserController],
@@ -22,6 +23,7 @@ import {LoggerModule} from '../logger/logger.module';
     LocalStrategy
   ],
   modules: [
+    EmailValidatorModule,
     DatabaseModule,
     LoggerModule
   ]

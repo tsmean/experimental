@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, UseGuards, ReflectMetadata, UseInterceptors, Param, Res, Query} from '@nestjs/common';
+import {Controller, Get, Post, Body, UseGuards, ReflectMetadata, UseInterceptors, Param, Res, Query, Inject} from '@nestjs/common';
 import { UserService } from './user.service';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
@@ -8,14 +8,15 @@ import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 import {User} from './user.entity';
 import {CreateUserDto} from '../../../shared/src/dto/user/create-user.dto';
 import {FindManyOptions} from 'typeorm';
-import {emailValidator} from '../../../shared/src/email-validator/email-validator.service';
+import {EmailValidatorImpl} from '../validation/email/email-validator.component';
 
 @Controller('users')
 @UseGuards(RolesGuard)
 @UseInterceptors(LoggingInterceptor, TransformInterceptor)
 export class UserController {
   constructor(
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private readonly emailValidator: EmailValidatorImpl
   ) {}
 
   @Post()
@@ -55,7 +56,7 @@ export class UserController {
    */
   @Get(':idOrEmail')
   findOne(@Param('idOrEmail') idOrEmail): Promise<User> {
-    const isEmail = emailValidator.simpleCheck(idOrEmail);
+    const isEmail = this.emailValidator.simpleCheck(idOrEmail);
     return isEmail ?
       this.userService.findOneByEmail(idOrEmail) :
       this.userService.findOneById(parseInt(idOrEmail, 10));
