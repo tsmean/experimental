@@ -17,8 +17,8 @@ export class WelcomeHtmlController {
   </h1>
   <p>
     The REST-API can perform basic crud operations, but also has login / logout functionality.
-    <!--TODO: Describe this a little better-->
   </p>
+  <!-- Would be cool if Nest could automatically generate API Docs, which could be displayed here... -->
 </body>
 </html>`);
   }

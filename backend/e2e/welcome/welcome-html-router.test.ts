@@ -1,4 +1,4 @@
-import {WelcomeHtmlController} from './welcome-html-router';
+import {WelcomeHtmlController} from '../../src/welcome/welcome-html-router';
 import { Test } from '@nestjs/testing';
 
 describe('Test simple welcome Html Router', () => {

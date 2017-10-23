@@ -2,27 +2,34 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
-import {WelcomeHtmlController} from '../../src/router-module/endpoints/welcome-html-router';
+import {UserModule} from '../../src/user/user.module';
+import {UserService} from '../../src/user/user.service';
 
-describe('Welcome Router', () => {
+describe('User e2e', () => {
   const server = express();
   server.use(bodyParser.json());
 
+  const userService = { findAll: () => ['test'] };
+
   beforeAll(async () => {
     const module = await Test.createTestingModule({
-      modules: [WelcomeHtmlController],
-    }).compile();
+      modules: [
+        UserModule
+      ],
+    })
+      .overrideComponent(UserService).useValue(userService)
+      .compile();
 
     const app = module.createNestApplication(server);
     await app.init();
   });
 
-  it(`/GET cats`, () => {
+  it(`/GET users`, () => {
     return request(server)
-      .get('/cats')
+      .get('/users')
       .expect(200)
       .expect({
-        data: 'hi',
+        data: userService.findAll(),
       });
   });
 });
