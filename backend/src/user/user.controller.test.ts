@@ -5,6 +5,8 @@ import {UserService} from './user.service';
 import {User} from './user.entity';
 import {databaseProviders} from '../database/database.providers';
 import {userProviders} from './user.providers';
+import {EmailValidatorImpl} from '../validation/email/email-validator.component';
+import {Log} from '../logger/logger';
 
 describe('UserController', () => {
   let userController: UserController;
@@ -14,6 +16,8 @@ describe('UserController', () => {
     const module = await Test.createTestingModule({
         controllers: [UserController],
         components: [
+          EmailValidatorImpl,
+          Log,
           PasswordCryptographerServiceImpl,
           ...databaseProviders,
           ...userProviders,
