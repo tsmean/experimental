@@ -50,6 +50,30 @@ describe('UserController', () => {
     done();
   });
 
+  it('should be able to update one user', async (done) => {
+    const user = exampleUser(1);
+    jest.spyOn(userService, 'update').mockImplementation(() => undefined);
+    const returnVal = await userController.fullUpdate(user);
+    expect(returnVal).toBeUndefined();
+    done();
+  });
+
+  it('should be able to partial update one user', async (done) => {
+    const user = exampleUser(1);
+    jest.spyOn(userService, 'update').mockImplementation(() => undefined);
+    const returnVal = await userController.partialUpdate(user.id, user);
+    expect(returnVal).toBeUndefined();
+    done();
+  });
+
+  it('should be able to remove one user', async (done) => {
+    const user = exampleUser(1);
+    jest.spyOn(userService, 'remove').mockImplementation(() => undefined);
+    const returnVal = await userController.remove(user.id);
+    expect(returnVal).toBeUndefined();
+    done();
+  });
+
   function exampleUser(id: number): User {
     return {
       id: id,

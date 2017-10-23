@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, UseGuards, ReflectMetadata, UseInterceptors, Param, Res, Query, Inject} from '@nestjs/common';
+import {Controller, Get, Post, Body, UseGuards, UseInterceptors, Param, Res, Put, Delete, Patch} from '@nestjs/common';
 import { UserService } from './user.service';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
@@ -9,6 +9,7 @@ import {User} from './user.entity';
 import {CreateUserDto} from '../../../shared/src/dto/user/create-user.dto';
 import {FindManyOptions} from 'typeorm';
 import {EmailValidatorImpl} from '../validation/email/email-validator.component';
+import {DeepPartial} from 'typeorm/common/DeepPartial';
 
 @Controller('users')
 @UseGuards(RolesGuard)
@@ -43,6 +44,7 @@ export class UserController {
   }
 
   @Get()
+  // TODO: Only user can get info on himself or maybe admin
   async find(options?: FindManyOptions<User>): Promise<User[]> {
     const defaultOptions = {
       take: 100,
@@ -55,11 +57,29 @@ export class UserController {
    * Duck-Typed Input: could either be an integer for the id or the e-mail address of the user
    */
   @Get(':idOrEmail')
+  // TODO: Only user can get info on himself or maybe admin
   findOne(@Param('idOrEmail') idOrEmail): Promise<User> {
     const isEmail = this.emailValidator.simpleCheck(idOrEmail);
     return isEmail ?
       this.userService.findOneByEmail(idOrEmail) :
       this.userService.findOneById(parseInt(idOrEmail, 10));
+  }
+
+  @Put()
+  // TODO: Only user can update himself or maybe admin
+  async fullUpdate(user: User) {
+    return this.userService.update(user.id, user);
+  }
+
+  @Patch(':id')
+  async partialUpdate(@Param('id', new ParseIntPipe()) id, partialEntry: DeepPartial<User>) {
+    return this.userService.update(id, partialEntry);
+  }
+
+  @Delete(':id')
+  // TODO: Only user can delete himself or maybe admin
+  async remove(@Param('id', new ParseIntPipe()) id) {
+    return this.userService.remove(id);
   }
 
 }
