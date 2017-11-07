@@ -46,7 +46,7 @@ Make sure you have typescript installed, then run:
 ```
 npm start
 ```
-By default, a server at localhost:4242 is started.
+By default, a server at port 4242 (localhost:4242) is started.
 
 # Test
 ```
